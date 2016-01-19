@@ -1,7 +1,7 @@
 var Square = Shape.extend({
 
-	constructor: function(pos,color) {
-		this.base("Square",pos,color);
+	constructor: function() {
+		this.base("Square");
 	},
 
 	draw: function(canvas) {
@@ -25,6 +25,6 @@ var Square = Shape.extend({
 			this.pos.y += this.size.y;
 			this.size.y = Math.abs(this.size.y);
 		}
-	},	
+	},
 
 });
