@@ -10,6 +10,7 @@ var Shape = Base.extend({
 		this.startY = 0;
 		this.drawlineX = new Array();
 		this.drawlineY = new Array();
+		this.radius = 0;
 	},
 
 
