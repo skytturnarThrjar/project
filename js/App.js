@@ -1,4 +1,7 @@
 function App(canvasSelector) {
+	canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
 	var self = this;
 	self.getEventPoint = function(e) {
 		return new Point(e.pageX - self.canvasOffset.x,e.pageY - self.canvasOffset.y);
@@ -47,6 +50,13 @@ function App(canvasSelector) {
 			mousemove:drawing,
 			mouseup:drawingStop
 		});
+		window.addEventListener('resize', CanvasResizeFunction, false);	
+
+		function CanvasResizeFunction() {
+			canvas.width = window.innerWidth;
+   			canvas.height = window.innerHeight;
+			self.redraw();
+		};
 	};
 
 	self.mousedown = function(e) {
@@ -91,7 +101,7 @@ function App(canvasSelector) {
 
 		// Set defaults
 		self.color = '#ff0000';
-		self.width = 10;
+		self.width = 1;
 		// TODO: Set sensible defaults ...
 	};
 
@@ -102,6 +112,7 @@ var app = null;
 $(function() {
 	// Wire up events
 	app = new App('#canvas');
+	
 	$('#squarebutton').click(function(){app.shapeFactory = function() {
 		return new Square();
 	};});
@@ -120,4 +131,9 @@ $(function() {
 	$('#clearbutton').click(function(){app.clear();});
 	$('#color').change(function(){app.setColor($(this).val());});
 	$('#width').change(function(){app.setWidth($(this).val());});
+	$("control_id").attr("checked",true);
+	
+    var checked = document.getElementById("squarebutton");
+    checked.click();
+	
 });

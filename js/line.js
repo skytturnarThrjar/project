@@ -11,10 +11,10 @@ var Line = Shape.extend({
 
 	draw: function(canvas) {
 		canvas.strokeStyle = this.color;
+		canvas.lineWidth = this.width;
 		canvas.beginPath();
 		canvas.moveTo(this.startX,this.startY);
 		canvas.lineTo(this.size.x,this.size.y);
-		canvas.lineWidth = this.width;
 		canvas.stroke();
 		this.base(canvas);
 		canvas.closePath();

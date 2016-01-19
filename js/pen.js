@@ -10,6 +10,7 @@ var Pen = Shape.extend({
 
 	draw: function(canvas) {
 		canvas.strokeStyle = this.color;
+		canvas.lineWidth = this.width;
 		canvas.beginPath();
 		canvas.moveTo(this.pos.x, this.pos.y);
 		for(var i = 0; i < this.drawlineX.length; i++) {

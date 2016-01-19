@@ -1,10 +1,12 @@
-<html>
+<html lang="en">
 <head>
-	<title>JS-Draw</title>
-	<style>
-		#toolbar {background-color:silver;}
-		#canvas {border:1px solid blue;display:block;}
-	</style>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<title>Draw</title>
+
 	<script type="text/javascript" src="js/base.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
@@ -15,39 +17,64 @@
 	<script type="text/javascript" src="js/text.js"></script>
 	<script type="text/javascript" src="js/line.js"></script>
 	<script type="text/javascript" src="js/pen.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+
 </head>
-<body>
-	<div id="toolbar">
-			<input type="radio" name="tool" id="squarebutton" value="square"></input><label for="squarebutton">Square</label>
-			<input type="radio" name="tool" id="circlebutton" value="circle"></input><label for="circlebutton">Circle</label>
-			<input type="radio" name="tool" id="penbutton" value="pen"></input><label for="penbutton">Pen</label>
-			<input type="radio" name="tool" id="linebutton" value="line"></input><label for="linebutton">Line</label>
-			<input type="radio" name="tool" id="textbutton" value="text"></input><label for="textbutton">Text</label>
-			<select id="fontStyle">
- 				<option value="normal">Normal</option>
- 				<option value="italic">Italic</option>
- 				<option value="bold">Bold</option>
-			</select>
-			<select id="fontSize">
-				<option value="10pt">10pt</option>
-				<option value="12pt">12pt</option>
-				<option value="14pt">14pt</option>
-				<option value="16pt">16pt</option>
-				<option value="32pt">32pt</option>
-				<option value="64pt">64pt</option>
-			</select>
-			<select id="font">
-				<option value="Arial">Arial</option>
-				<option value="Comic Sans MS">Comic Sans</option>
-				<option value="Courier New">Courier New</option>
-				<option value="Trebuchet MS">Trebuchet MS</option>
-				<option value="Verdana">Verdana</option>
-			</select>
-			<input type="color" name="color" id="color" value="#ff0000"></input>
-			<input type="button" name="clearbutton" id="clearbutton" value="clear"></input>
+<body class="row">
+	<div class="col-md-10">
+	  	<canvas id="canvas" ></canvas>
 	</div>
-	<canvas id="canvas" height="500" width="500"></canvas>
+
+	<div class="col-md-2">
+		<div id="toolbar">
+				<input type="radio" name="tool" id="squarebutton" value="square"></input><label for="squarebutton">Square</label><br/>
+				<input type="radio" name="tool" id="circlebutton" value="circle"></input><label for="circlebutton">Circle</label><br/>
+				<input type="radio" name="tool" id="penbutton" value="pen"></input><label for="penbutton">Pen</label><br/>
+				<input type="radio" name="tool" id="linebutton" value="line"></input><label for="linebutton">Line</label><br/>
+				<input type="radio" name="tool" id="textbutton" value="text"></input><label for="textbutton">Text</label>
+				<input type="color" name="color" id="color" value="#ff0000"></input><br/>
+
+				<select class="form-control dropdown" id="fontStyle">
+	 				<option value="normal">Normal</option>
+	 				<option value="italic">Italic</option>
+	 				<option value="bold">Bold</option>
+				</select>
+				<select class="form-control dropdown" id="fontSize">
+					<option value="10pt">10pt</option>
+					<option value="12pt">12pt</option>
+					<option value="14pt">14pt</option>
+					<option value="16pt">16pt</option>
+					<option value="32pt">32pt</option>
+					<option value="64pt">64pt</option>
+				</select>
+				<select class="form-control dropdown" id="font">
+					<option value="Arial">Arial</option>
+					<option value="Comic Sans MS">Comic Sans</option>
+					<option value="Courier New">Courier New</option>
+					<option value="Trebuchet MS">Trebuchet MS</option>
+					<option value="Verdana">Verdana</option>
+				</select>
+				<input class="btn btn-default" type="button" name="clearbutton" id="clearbutton" value="clear"></input>
+				<input class="btn btn-default" type="button" name="tool" id="undobutton" value="undo"></input>
+				<input class="btn btn-default" type="button" name="tool" id="redobutton" value="redo"></input>
+				<select class="form-control dropdown" id="width">
+					<option value="1">1px</option>
+					<option value="2">2px</option>
+					<option value="4">4px</option>
+					<option value="6">6px</option>
+					<option value="8">8px</option>
+					<option value="10">10px</option>
+				</select>
+		</div>
+	</div>
+
 	<div class="textfield"><input type="text" id="textbox"/></div>
 	<!-- pos - absolute, zindex - 99, display - none, bæta við hniti í samræmi við alla síðuna, default hide, onclick show-->
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
