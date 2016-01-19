@@ -1,15 +1,16 @@
 var Textbox = Shape.extend({
 
-//Það sem á eftir að gera við textann er að taka inn mismunandi font style, font size og font :) 
-  constructor: function(pos, color) {
-    this.base("Textbox", pos, color);
+//Það sem á eftir að gera við textann er að taka inn mismunandi font style, font size og font :)
+  constructor: function(font, fontsize, fontstyle) {
+    this.base("Textbox");
     this.text = " ";
-    this.font = "Comic Sans MS";
-    this.fontsize = "14pt";
+    this.font = font;
+    this.fontsize = fontsize;
+    this.fontstyle = fontstyle;
   },
 
   draw: function(canvas) {
-    canvas.font = (this.fontsize + " " + this.font);
+    canvas.font = (this.fontstyle + " " + this.fontsize + " " + this.font);
     canvas.fillStyle = this.color;
     canvas.fillText(this.text, this.pos.x, this.pos.y);
   },
