@@ -10,12 +10,15 @@ var Textbox = Shape.extend({
   },
 
   draw: function(canvas) {
+    canvas.beginPath();
     canvas.font = (this.fontstyle + " " + this.fontsize + " " + this.font);
     canvas.fillStyle = this.color;
     canvas.fillText(this.text, this.pos.x, this.pos.y);
+    canvas.closePath();
   },
 
   added: function(canvas) {
+    //CUSTOMIZEA PROMPT!! eða gera eins og kallinn okkar sagði :):)
     this.text = prompt("Write text");
   }
 });

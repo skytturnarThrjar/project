@@ -5,9 +5,12 @@ var Square = Shape.extend({
 	},
 
 	draw: function(canvas) {
+		canvas.beginPath();
 		canvas.strokeStyle = this.color;
 		canvas.strokeRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
+		canvas.lineWidth = this.width;
 		this.base(canvas);
+		canvas.closePath();
 	},
 
 	drawing:function(point) {
@@ -26,5 +29,4 @@ var Square = Shape.extend({
 			this.size.y = Math.abs(this.size.y);
 		}
 	},
-
 });

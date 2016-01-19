@@ -2,13 +2,14 @@ function App(canvasSelector) {
 	var self = this;
 	self.getEventPoint = function(e) {
 		return new Point(e.pageX - self.canvasOffset.x,e.pageY - self.canvasOffset.y);
-	}
+	};
 
 	self.drawingStart = function(e) {
 		var startPos = self.getEventPoint(e);
 		var shape = self.shapeFactory();
 		shape.pos = startPos;
 		shape.color = self.color;
+		shape.width = self.width;
 
 		shape.startDrawing(startPos,self.canvasContext);
 		startPos.log('drawing start');
@@ -20,14 +21,14 @@ function App(canvasSelector) {
 
 			self.redraw();
 			shape.draw(self.canvasContext);
-		}
+		};
 
 		var drawingStop = function(e) {
 			var pos = self.getEventPoint(e);
 
 			shape.stopDrawing(pos,self.canvasContext);
 
-			pos.log('drawing stop')
+			pos.log('drawing stop');
 
 			self.shapes.push(shape);
 			shape.added(self.canvasContext);
@@ -39,39 +40,43 @@ function App(canvasSelector) {
 			});
 
 			self.redraw();
-		}
+		};
 
 		// Add drawing and drawingStop functions to the mousemove and mouseup events
 		self.canvas.on({
 			mousemove:drawing,
 			mouseup:drawingStop
 		});
-	}
+	};
 
 	self.mousedown = function(e) {
-		if(self.shapeFactory != null) {
+		if(self.shapeFactory !== null) {
 			self.drawingStart(e);
 		} else {
 		}
 
 		self.redraw();
-	}
+	};
 
 	self.redraw = function() {
 		self.canvasContext.clearRect(0, 0, self.canvasContext.canvas.width, self.canvasContext.canvas.height);
 		for(var i = 0; i < self.shapes.length; i++) {
 			self.shapes[i].draw(self.canvasContext);
 		}
-	}
+	};
 
 	self.clear = function() {
 		self.shapes = [];
 		self.redraw();
-	}
+	};
 
 	self.setColor = function(color) {
 		self.color = color;
-	}
+	};
+
+	self.setWidth = function(width) {
+		self.width = width;
+	};
 
 	self.init = function() {
 		// Initialize App
@@ -86,8 +91,9 @@ function App(canvasSelector) {
 
 		// Set defaults
 		self.color = '#ff0000';
+		self.width = 10;
 		// TODO: Set sensible defaults ...
-	}
+	};
 
 	self.init();
 }
@@ -97,7 +103,7 @@ $(function() {
 	// Wire up events
 	app = new App('#canvas');
 	$('#squarebutton').click(function(){app.shapeFactory = function() {
-		return new Square();	
+		return new Square();
 	};});
 	$('#circlebutton').click(function(){app.shapeFactory = function() {
 		return new Circle();
@@ -113,4 +119,5 @@ $(function() {
 	};});
 	$('#clearbutton').click(function(){app.clear();});
 	$('#color').change(function(){app.setColor($(this).val());});
+	$('#width').change(function(){app.setWidth($(this).val());});
 });

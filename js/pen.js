@@ -1,10 +1,10 @@
 var Pen = Shape.extend({
 
-	constructor: function(pos,color) {
-		this.base("Pen",pos,color);
+	constructor: function() {
+		this.base("Pen");
 	},
 
-	
+
 	startDrawing:function(point) {
 	},
 

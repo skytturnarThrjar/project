@@ -1,7 +1,7 @@
 var Line = Shape.extend({
 
-	constructor: function(pos,color) {
-		this.base("Line",pos,color);
+	constructor: function() {
+		this.base("Line");
 	},
 
 	startDrawing:function(point) {
@@ -14,8 +14,10 @@ var Line = Shape.extend({
 		canvas.beginPath();
 		canvas.moveTo(this.startX,this.startY);
 		canvas.lineTo(this.size.x,this.size.y);
+		canvas.lineWidth = this.width;
 		canvas.stroke();
 		this.base(canvas);
+		canvas.closePath();
 	},
 
 	drawing:function(point) {
