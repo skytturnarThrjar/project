@@ -103,7 +103,7 @@ $(function() {
 		return new Circle();
 	};});
 	$('#textbutton').click(function(){app.shapeFactory = function() {
-	  return new Textbox("Comic Sans MS", $('#fontSize').val(), $('#fontStyle').val());
+	  return new Textbox($('#font').val(), $('#fontSize').val(), $('#fontStyle').val());
 	};});
 	$('#clearbutton').click(function(){app.clear();});
 	$('#color').change(function(){app.setColor($(this).val());});

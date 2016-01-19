@@ -12,16 +12,36 @@
 	<script type="text/javascript" src="js/shape.js"></script>
 	<script type="text/javascript" src="js/square.js"></script>
 	<script type="text/javascript" src="js/circle.js"></script>
+	<script type="text/javascript" src="js/text.js"></script>
 </head>
 <body>
 	<div id="toolbar">
 			<input type="radio" name="tool" id="squarebutton" value="square"></input><label for="squarebutton">Square</label>
 			<input type="radio" name="tool" id="=circlebutton" value="circle"></input><label for="circlebutton">Circle</label>
+			<input type="radio" name="tool" id="textbutton" value="text"></input><label for="textbutton">Text</label>
+			<select id="fontStyle">
+ 				<option value="normal">Normal</option>
+ 				<option value="italic">Italic</option>
+ 				<option value="bold">Bold</option>
+			</select>
+			<select id="fontSize">
+				<option value="10pt">10pt</option>
+				<option value="12pt">12pt</option>
+				<option value="14pt">14pt</option>
+				<option value="16pt">16pt</option>
+				<option value="32pt">32pt</option>
+				<option value="64pt">64pt</option>
+			</select>
+			<select id="font">
+				<option value="Arial">Arial</option>
+				<option value="Comic Sans MS">Comic Sans</option>
+				<option value="Courier New">Courier New</option>
+				<option value="Trebuchet MS">Trebuchet MS</option>
+				<option value="Verdana">Verdana</option>
+			</select>
 			<input type="color" name="color" id="color" value="#ff0000"></input>
 			<input type="button" name="clearbutton" id="clearbutton" value="clear"></input>
 	</div>
 	<canvas id="canvas" height="500" width="500"></canvas>
 </body>
 </html>
-
-
