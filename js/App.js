@@ -99,6 +99,9 @@ $(function() {
 	$('#squarebutton').click(function(){app.shapeFactory = function() {
 		return new Square();
 	};});
+	$('#circlebutton').click(function(){app.shapeFactory = function() {
+		return new Circle();
+	};});
 	$('#textbutton').click(function(){app.shapeFactory = function() {
 	  return new Textbox("Comic Sans MS", $('#fontSize').val(), $('#fontStyle').val());
 	};});
