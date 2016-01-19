@@ -97,10 +97,16 @@ $(function() {
 	// Wire up events
 	app = new App('#canvas');
 	$('#squarebutton').click(function(){app.shapeFactory = function() {
-		return new Square();
+		return new Square();	
 	};});
 	$('#circlebutton').click(function(){app.shapeFactory = function() {
 		return new Circle();
+	};});
+	$('#linebutton').click(function(){ app.shapeFactory = function() {
+		return new Line();
+	};});
+	$('#penbutton').click(function(){ app.shapeFactory = function() {
+		return new Pen();
 	};});
 	$('#textbutton').click(function(){app.shapeFactory = function() {
 	  return new Textbox($('#font').val(), $('#fontSize').val(), $('#fontStyle').val());

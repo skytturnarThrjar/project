@@ -8,6 +8,8 @@ var Shape = Base.extend({
 		this.selected = false;
 		this.startX = 0; 
 		this.startY = 0;
+		this.drawlineX = new Array();
+		this.drawlineY = new Array();
 	},
 
 
