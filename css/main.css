@@ -6,7 +6,6 @@ body
 
 .dropdown {
     width: 100px;
-
 }
 
 #toolbar {
@@ -23,12 +22,13 @@ body
 
 .textfield {
 	position: absolute;
-	/*z-index: 99;*/
-	visibility: hidden;
-	top:10;
+	z-index: 99;
+	display: none;
+	width: 50px;
+  height: 400px;
 }
 
-
-
-
-
+#textfield {
+  height: 50px;
+  width: 300px;
+}

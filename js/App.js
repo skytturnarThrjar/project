@@ -1,6 +1,6 @@
 function App(canvasSelector) {
 	canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  canvas.height = window.innerHeight;
 
 	var self = this;
 	self.getEventPoint = function(e) {
@@ -16,10 +16,18 @@ function App(canvasSelector) {
 
 		shape.startDrawing(startPos,self.canvasContext);
 		startPos.log('drawing start');
+		if(shape.name == "Textbox") {
+			console.log(shape);
+			self.shapes.push(shape);
+		}
+
+		//tried this but didnt work :(
+		/*if(shape.name == "Textbox") {
+			self.shapes.push(shape);
+		}*/
 
 		var drawing = function(e) {
 			var pos = self.getEventPoint(e);
-
 			shape.drawing(pos,self.canvasContext);
 
 			self.redraw();
@@ -33,34 +41,37 @@ function App(canvasSelector) {
 
 			pos.log('drawing stop');
 
+			//tried to do this but didnt work :(
+			/*if(shape.name != "Textbox") {
+				self.shapes.push(shape);
+			}*/
 			self.shapes.push(shape);
-			console.log(shape);
 
-			// Empty the redo array 
+			// Empty the redo array
 			self.undoShapes = [];
 			shape.added(self.canvasContext);
 
 			// Remove drawing and drawingStop functions from the mouse events
 			self.canvas.off({
 				mousemove:drawing,
-				mouseup:drawingStop
+			  mouseup:drawingStop
 			});
 
 			self.redraw();
 		};
 
 		// Add drawing and drawingStop functions to the mousemove and mouseup events
-		self.canvas.on({	
+		self.canvas.on({
 			mousemove:drawing,
 			mouseup:drawingStop
 		});
-		window.addEventListener('resize', CanvasResizeFunction, false);	
+		window.addEventListener('resize', CanvasResizeFunction, false);
 
 		function CanvasResizeFunction() {
 			canvas.width = window.innerWidth;
    			canvas.height = window.innerHeight;
 			self.redraw();
-		};
+		}
 	};
 
 	self.mousedown = function(e) {
@@ -68,7 +79,6 @@ function App(canvasSelector) {
 			self.drawingStart(e);
 		} else {
 		}
-
 		self.redraw();
 	};
 
@@ -106,7 +116,6 @@ function App(canvasSelector) {
 				error: function (xhr, err) {
 					// Something went wrong...
 					console.log("nat");
-
 				}
 			});
 	};
@@ -140,7 +149,6 @@ function App(canvasSelector) {
 				error: function (xhr, err) {
 					// Something went wrong...
 					console.log("nat");
-
 				}
 			});
 	};
@@ -159,16 +167,11 @@ function App(canvasSelector) {
 				dataType: "jsonp",
 				crossDomain: true,
 				success: function (data) {
-
 					var WhiteboardContents = JSON.parse(data.WhiteboardContents);
 					console.log(WhiteboardContents);
 					for(var i = 0; i < WhiteboardContents.length(); i++) {
-
 						var shape;
-						
 						self.shapes.push(shape);
-
-
 					}
 
 				},
@@ -206,6 +209,10 @@ function App(canvasSelector) {
 		self.width = width;
 	};
 
+	self.getLastElement = function() {
+		return self.shapes[self.shapes.length - 1];
+	};
+
 	self.init = function() {
 		// Initialize App
 		self.canvas = $(canvasSelector);
@@ -218,10 +225,9 @@ function App(canvasSelector) {
 		self.shapes = new Array();
 		self.undoShapes = new Array();
 
-
 		// Set defaults
 		self.color = '#ff0000';
-		self.width = 1;
+		self.width = 2;
 		// TODO: Set sensible defaults ...
 	};
 
@@ -232,33 +238,72 @@ var app = null;
 $(function() {
 	// Wire up events
 	app = new App('#canvas');
-	
-	$('#squarebutton').click(function(){app.shapeFactory = function() {
-		return new Square();
-	};});
-	$('#circlebutton').click(function(){app.shapeFactory = function() {
-		return new Circle();
-	};});
-	$('#linebutton').click(function(){ app.shapeFactory = function() {
-		return new Line();
-	};});
-	$('#penbutton').click(function(){ app.shapeFactory = function() {
+
+	$('#squarebutton').click(function() {
+		app.shapeFactory = function() {
+			return new Square();
+		};
+	});
+	$('#circlebutton').click(function() {
+		app.shapeFactory = function() {
+			return new Circle();
+		};
+	});
+	$('#linebutton').click(function() {
+		app.shapeFactory = function() {
+			return new Line();
+		};
+	});
+	$('#penbutton').click(function() {
+		app.shapeFactory = function() {
 		return new Pen();
-	};});
-	$('#textbutton').click(function(){app.shapeFactory = function() {
-	  return new Textbox($('#font').val(), $('#fontSize').val(), $('#fontStyle').val());
-	};});
-	$('#clearbutton').click(function(){app.clear();});
-	$('#undobutton').click(function(){app.undo();});
-	$('#redobutton').click(function(){app.redo();});
-	$('#savebutton').click(function(){app.save();});
-	$('#loadDrawingbutton').click(function(){app.loadDrawing();});
-	$('#loadDrawingListbutton').click(function(){app.loadDrawingList();});
-	$('#color').change(function(){app.setColor($(this).val());});
-	$('#width').change(function(){app.setWidth($(this).val());});
+		};
+	});
+	$('#textbutton').click(function() {
+		app.shapeFactory = function() {
+	  	return new Textbox($('#font').val(), $('#fontSize').val(), $('#fontStyle').val());
+		};
+	});
+	$('#textbox').keyup(function(e){
+		if(e.which === 13) {
+			//KALLA Á ADD FALLIÐ??
+			var text = $('#textbox').val();
+			var bla = app.shapeFactory();
+			bla.setText(text);
+			//app.shapes.push(bla);
+			//console.log(bla);
+			//app.redraw();
+			$('#textbox').val('');
+			$('.textfield').hide();
+		}
+	});
+
+	$('#clearbutton').click(function() {
+		app.clear();
+	});
+	$('#undobutton').click(function() {
+		app.undo();
+	});
+	$('#redobutton').click(function() {
+		app.redo();
+	});
+	$('#savebutton').click(function() {
+		app.save();
+	});
+	$('#loadDrawingbutton').click(function() {
+		app.loadDrawing();
+	});
+	$('#loadDrawingListbutton').click(function() {
+		app.loadDrawingList();
+	});
+	$('#color').change(function() {
+		app.setColor($(this).val());
+	});
+	$('#width').change(function() {
+		app.setWidth($(this).val());
+	});
 	$("control_id").attr("checked",true);
-	
-    var checked = document.getElementById("penbutton");
-    checked.click();
-	
+
+  var checked = document.getElementById("penbutton");
+  checked.click();
 });
