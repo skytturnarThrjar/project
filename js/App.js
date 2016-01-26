@@ -34,6 +34,7 @@ function App(canvasSelector) {
 			pos.log('drawing stop');
 
 			self.shapes.push(shape);
+			console.log(shape);
 
 			// Empty the redo array 
 			self.undoShapes = [];
@@ -83,17 +84,10 @@ function App(canvasSelector) {
 		self.redraw();
 	};
 
-	self.undo = function() {
-		var undoShape = self.shapes.pop();
-		self.undoShapes.push(undoShape);
-		self.redraw();
-
-	};
-
 	self.save = function() {
 		var stringifiedArray = JSON.stringify(self.shapes);
 			var param = { "user": "laufey14", // You should use your own username!
-				"name": "test1", //title,
+				"name": "test2", //title,
 				"content": stringifiedArray,
 				"template": true
 			};
@@ -133,7 +127,14 @@ function App(canvasSelector) {
 				dataType: "jsonp",
 				crossDomain: true,
 				success: function (data) {
-					self.redraw(data);
+				var str = "<ul class='xbreadcrumbs' style='position:absolute; bottom:0px'>";
+
+					for( var i in data)
+					{
+   						str += '<li><a href="#">'+ data[i].WhiteboardTitle +'</a></li>';
+					}
+					str += '</ul>';
+					$('body').append(str);
 					console.log(data);
 				},
 				error: function (xhr, err) {
@@ -147,7 +148,7 @@ function App(canvasSelector) {
 	self.loadDrawing = function() {
 		var stringifiedArray = JSON.stringify(self.shapes);
 			var param = { "user": "laufey14", // You should use your own username!
-				"id" : 3599 // ekki harðkóða
+				"id" : 3622 // ekki harðkóða
 			};
 
 			$.ajax({
@@ -158,8 +159,18 @@ function App(canvasSelector) {
 				dataType: "jsonp",
 				crossDomain: true,
 				success: function (data) {
-					self.redraw(data);
-					console.log(data);
+
+					var WhiteboardContents = JSON.parse(data.WhiteboardContents);
+					console.log(WhiteboardContents);
+					for(var i = 0; i < WhiteboardContents.length(); i++) {
+
+						var shape;
+						
+						self.shapes.push(shape);
+
+
+					}
+
 				},
 				error: function (xhr, err) {
 					// Something went wrong...
@@ -167,6 +178,12 @@ function App(canvasSelector) {
 
 				}
 			});
+	};
+
+	self.undo = function() {
+		var undoShape = self.shapes.pop();
+		self.undoShapes.push(undoShape);
+		self.redraw();
 	};
 
 	self.redo = function() {
@@ -179,7 +196,6 @@ function App(canvasSelector) {
 			self.redraw();
 		}
 		console.log(self.undoShapes);
-
 	};
 
 	self.setColor = function(color) {

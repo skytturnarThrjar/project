@@ -6,7 +6,7 @@
 
 
 	<title>Draw</title>
-
+	
 	<script type="text/javascript" src="js/base.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
@@ -17,6 +17,8 @@
 	<script type="text/javascript" src="js/text.js"></script>
 	<script type="text/javascript" src="js/line.js"></script>
 	<script type="text/javascript" src="js/pen.js"></script>
+
+
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 
@@ -33,7 +35,8 @@
 				<input type="radio" name="tool" id="penbutton" value="pen"></input><label for="penbutton">Pen</label><br/>
 				<input type="radio" name="tool" id="linebutton" value="line"></input><label for="linebutton">Line</label><br/>
 				<input type="radio" name="tool" id="textbutton" value="text"></input><label for="textbutton">Text</label>
-				<input type="color" name="color" id="color" value="#ff0000"></input><br/>
+				<input class="bfh-colorpicker" type="color" name="color" id="color" value="#ff0000"></input><br/>
+				<input type="text" class="demo1" value="#5367ce" />
 
 				<select class="form-control dropdown" id="fontStyle">
 	 				<option value="normal">Normal</option>

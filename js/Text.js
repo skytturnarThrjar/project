@@ -9,6 +9,12 @@ var Textbox = Shape.extend({
     this.fontstyle = fontstyle;
   },
 
+  startDrawing:function(point) {
+    
+    document.getElementById("textbox").style.visibility='visible';
+    
+  },
+
   draw: function(canvas) {
     canvas.beginPath();
     canvas.font = (this.fontstyle + " " + this.fontsize + " " + this.font);
@@ -19,6 +25,8 @@ var Textbox = Shape.extend({
 
   added: function(canvas) {
     //CUSTOMIZEA PROMPT!! eða gera eins og kallinn okkar sagði :):)
-    this.text = prompt("Write text");
+    //this.text = prompt("Write text");
+
+    this.text = document.getElementById("textbox").value;
   }
 });
