@@ -17,8 +17,9 @@
 	<script type="text/javascript" src="js/text.js"></script>
 	<script type="text/javascript" src="js/line.js"></script>
 	<script type="text/javascript" src="js/pen.js"></script>
+	<script type="text/javascript" src="js/bootstrap-formhelpers.js"></script>
 
-
+	<link href="css/bootstrap-formhelpers.min.css" rel="stylesheet">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 
@@ -36,13 +37,13 @@
 				<input type="radio" name="tool" id="linebutton" value="line"></input><label for="linebutton">Line</label><br/>
 				<input type="radio" name="tool" id="textbutton" value="text"></input><label for="textbutton">Text</label>
 				<input class="bfh-colorpicker" type="color" name="color" id="color" value="#ff0000"></input><br/>
-				<input type="text" class="demo1" value="#5367ce" />
 
 				<select class="form-control dropdown" id="fontStyle">
 	 				<option value="normal">Normal</option>
 	 				<option value="italic">Italic</option>
 	 				<option value="bold">Bold</option>
 				</select>
+				<!--
 				<select class="form-control dropdown" id="fontSize">
 					<option value="10pt">10pt</option>
 					<option value="12pt">12pt</option>
@@ -50,14 +51,16 @@
 					<option value="16pt">16pt</option>
 					<option value="32pt">32pt</option>
 					<option value="64pt">64pt</option>
-				</select>
-				<select class="form-control dropdown" id="font">
+				</select>-->
+				<!--<select class="form-control dropdown" id="font">
 					<option value="Arial">Arial</option>
 					<option value="Comic Sans MS">Comic Sans</option>
 					<option value="Courier New">Courier New</option>
 					<option value="Trebuchet MS">Trebuchet MS</option>
 					<option value="Verdana">Verdana</option>
-				</select>
+				</select>-->
+				<div class="bfh-selectbox bfh-fontsizes" data-fontsize="12" id="fontSize"></div>
+				<div class="bfh-selectbox bfh-fonts" data-font="Arial" id="font"></div>
 				<input class="btn btn-default" type="button" name="clearbutton" id="clearbutton" value="clear"></input>
 				<input class="btn btn-default" type="button" name="tool" id="undobutton" value="undo"></input>
 				<input class="btn btn-default" type="button" name="tool" id="redobutton" value="redo"></input>
@@ -79,7 +82,7 @@
 	</div>
 
 	<div class="textfield">
-		<input type="text" id="textbox" autofocus="autofocus"/>
+		<input type="text" id="textbox" autofocus/>
 	</div>
 	<!-- pos - absolute, zindex - 99, display - none, bæta við hniti í samræmi við alla síðuna, default hide, onclick show-->
 

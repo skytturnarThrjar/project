@@ -15,7 +15,8 @@ var Textbox = Shape.extend({
 
   draw: function(canvas) {
     canvas.beginPath();
-    canvas.font = (this.fontstyle + " " + this.fontsize + " " + this.font);
+    //console.log(this.fontstyle + " " + this.fontsize + " " + this.font);
+    canvas.font = (this.fontstyle + " " + this.fontsize + "pt " + this.font);
     canvas.fillStyle = this.color;
     canvas.fillText(this.text, this.pos.x, this.pos.y);
     canvas.closePath();
