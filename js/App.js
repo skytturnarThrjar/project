@@ -34,9 +34,9 @@ function App(canvasSelector) {
 			pos.log('drawing stop');
 
 			self.shapes.push(shape);
-			console.log(shape);
+			//console.log(shape);
 
-			// Empty the redo array 
+			// Empty the redo array
 			self.undoShapes = [];
 			shape.added(self.canvasContext);
 
@@ -49,21 +49,28 @@ function App(canvasSelector) {
 			self.redraw();
 		};
 
+		//console.log('shape', shape.name);
+		if(shape.name === 'Textbox'){
+			drawingStop(e);
+		}
+
 		// Add drawing and drawingStop functions to the mousemove and mouseup events
-		self.canvas.on({	
+		self.canvas.on({
 			mousemove:drawing,
 			mouseup:drawingStop
 		});
-		window.addEventListener('resize', CanvasResizeFunction, false);	
+		window.addEventListener('resize', CanvasResizeFunction, false);
 
 		function CanvasResizeFunction() {
 			canvas.width = window.innerWidth;
    			canvas.height = window.innerHeight;
 			self.redraw();
-		};
+		}
+
 	};
 
 	self.mousedown = function(e) {
+
 		if(self.shapeFactory !== null) {
 			self.drawingStart(e);
 		} else {
@@ -165,7 +172,7 @@ function App(canvasSelector) {
 					for(var i = 0; i < WhiteboardContents.length(); i++) {
 
 						var shape;
-						
+
 						self.shapes.push(shape);
 
 
@@ -206,6 +213,11 @@ function App(canvasSelector) {
 		self.width = width;
 	};
 
+	self.setText = function(text){
+		self.shapes[self.shapes.length - 1].text = text;
+		self.redraw();
+	};
+
 	self.init = function() {
 		// Initialize App
 		self.canvas = $(canvasSelector);
@@ -232,7 +244,7 @@ var app = null;
 $(function() {
 	// Wire up events
 	app = new App('#canvas');
-	
+
 	$('#squarebutton').click(function(){app.shapeFactory = function() {
 		return new Square();
 	};});
@@ -248,6 +260,14 @@ $(function() {
 	$('#textbutton').click(function(){app.shapeFactory = function() {
 	  return new Textbox($('#font').val(), $('#fontSize').val(), $('#fontStyle').val());
 	};});
+
+	$('#textbox').keyup(function(e){
+		if(e.which === 13){
+			app.setText($('#textbox').val());
+			$('.textfield').hide();
+			$('#textbox').val("");
+		}
+	});
 	$('#clearbutton').click(function(){app.clear();});
 	$('#undobutton').click(function(){app.undo();});
 	$('#redobutton').click(function(){app.redo();});
@@ -257,8 +277,8 @@ $(function() {
 	$('#color').change(function(){app.setColor($(this).val());});
 	$('#width').change(function(){app.setWidth($(this).val());});
 	$("control_id").attr("checked",true);
-	
+
     var checked = document.getElementById("penbutton");
     checked.click();
-	
+
 });

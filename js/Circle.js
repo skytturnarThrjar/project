@@ -1,5 +1,5 @@
 var Circle = Shape.extend({
-	
+
 	constructor: function() {
 		this.base("Circle");
 	},
@@ -7,7 +7,6 @@ var Circle = Shape.extend({
 	draw: function(canvas) {
 		canvas.strokeStyle = this.color;
 		canvas.lineWidth = this.width;
-		console.log(this.width);
 		canvas.beginPath();
 		canvas.arc( this.pos.x , this.pos.y, this.radius, 0, 2 * Math.PI, false );
 		canvas.stroke();

@@ -22,13 +22,15 @@ body
 }
 
 .textfield {
-	position: absolute;
-	/*z-index: 99;*/
-	visibility: hidden;
-	top:10;
+    position: absolute;
+    height: 50px;
+    width: 400px;
+    display: none;
+    z-index: 99;
 }
 
-
-
-
-
+#textbox{
+	font-size: 20pt;
+	height: 50px;
+    width: 300px;
+}
