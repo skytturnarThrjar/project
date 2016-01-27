@@ -1,3 +1,8 @@
+ function ShowWhiteboardDrawing(id) {
+ 	app.clear()
+	app.ShowDrawing(id);
+}
+
 function App(canvasSelector) {
 	canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -36,7 +41,7 @@ function App(canvasSelector) {
 			self.shapes.push(shape);
 			//console.log(shape);
 
-			// Empty the redo array
+			// Empty the redo array 
 			self.undoShapes = [];
 			shape.added(self.canvasContext);
 
@@ -53,24 +58,21 @@ function App(canvasSelector) {
 		if(shape.name === 'Textbox'){
 			drawingStop(e);
 		}
-
 		// Add drawing and drawingStop functions to the mousemove and mouseup events
-		self.canvas.on({
+		self.canvas.on({	
 			mousemove:drawing,
 			mouseup:drawingStop
 		});
-		window.addEventListener('resize', CanvasResizeFunction, false);
+		window.addEventListener('resize', CanvasResizeFunction, false);	
 
 		function CanvasResizeFunction() {
 			canvas.width = window.innerWidth;
    			canvas.height = window.innerHeight;
 			self.redraw();
 		}
-
 	};
 
 	self.mousedown = function(e) {
-
 		if(self.shapeFactory !== null) {
 			self.drawingStart(e);
 		} else {
@@ -94,7 +96,7 @@ function App(canvasSelector) {
 	self.save = function() {
 		var stringifiedArray = JSON.stringify(self.shapes);
 			var param = { "user": "laufey14", // You should use your own username!
-				"name": "test2", //title,
+				"name": "JAA", //title,
 				"content": stringifiedArray,
 				"template": true
 			};
@@ -109,6 +111,7 @@ function App(canvasSelector) {
 				success: function (data) {
 					// The save was successful...
 					console.log("worked");
+					self.loadDrawingList();
 				},
 				error: function (xhr, err) {
 					// Something went wrong...
@@ -121,7 +124,6 @@ function App(canvasSelector) {
 	self.loadDrawingList = function() {
 		var stringifiedArray = JSON.stringify(self.shapes);
 			var param = { "user": "laufey14", // You should use your own username!
-				"name": "test1",
 				"content": stringifiedArray,
 				"template": true
 			};
@@ -134,14 +136,17 @@ function App(canvasSelector) {
 				dataType: "jsonp",
 				crossDomain: true,
 				success: function (data) {
-				var str = "<ul class='xbreadcrumbs' style='position:absolute; bottom:0px'>";
+				var str = "<li '>";
+
+					$('#drawingList li').remove();
+
 
 					for( var i in data)
 					{
-   						str += '<li><a href="#">'+ data[i].WhiteboardTitle +'</a></li>';
+   						str += '<li onclick="ShowWhiteboardDrawing('+  data[i].ID  +')" class="whiteboardTemplate">' + data[i].WhiteboardTitle+ '</li>';
 					}
-					str += '</ul>';
-					$('body').append(str);
+					str += '</li>';
+					$("#drawingList").append(str);
 					console.log(data);
 				},
 				error: function (xhr, err) {
@@ -150,12 +155,14 @@ function App(canvasSelector) {
 
 				}
 			});
+				
+
 	};
 
-	self.loadDrawing = function() {
+	self.ShowDrawing = function ShowDrawing(id) {
 		var stringifiedArray = JSON.stringify(self.shapes);
 			var param = { "user": "laufey14", // You should use your own username!
-				"id" : 3622 // ekki harðkóða
+				"id" : id // ekki harðkóða
 			};
 
 			$.ajax({
@@ -168,15 +175,24 @@ function App(canvasSelector) {
 				success: function (data) {
 
 					var WhiteboardContents = JSON.parse(data.WhiteboardContents);
-					console.log(WhiteboardContents);
-					for(var i = 0; i < WhiteboardContents.length(); i++) {
 
-						var shape;
+					for(var i = 0; i < WhiteboardContents.length; i++) {
+
+						var shape = eval('new ' + WhiteboardContents[i].name + '();');
+
+						shape.pos = WhiteboardContents[i].pos;
+						shape.size = WhiteboardContents[i].size;
+						shape.color = WhiteboardContents[i].color;
+						shape.startX = WhiteboardContents[i].startX;
+						shape.startY = WhiteboardContents[i].startY;
+						shape.drawlineX = WhiteboardContents[i].drawlineX;
+						shape.drawlineY = WhiteboardContents[i].drawlineY;
+						shape.radius = WhiteboardContents[i].radius;
+						shape.width = WhiteboardContents[i].width;
 
 						self.shapes.push(shape);
-
-
 					}
+					self.redraw();
 
 				},
 				error: function (xhr, err) {
@@ -186,6 +202,7 @@ function App(canvasSelector) {
 				}
 			});
 	};
+
 
 	self.undo = function() {
 		var undoShape = self.shapes.pop();
@@ -209,7 +226,7 @@ function App(canvasSelector) {
 		self.color = color;
 	};
 
-	self.setWidth = function(width) {
+		self.setWidth = function(width) {
 		self.width = width;
 	};
 
@@ -217,7 +234,7 @@ function App(canvasSelector) {
 		self.shapes[self.shapes.length - 1].text = text;
 		self.redraw();
 	};
-
+ 
 	self.init = function() {
 		// Initialize App
 		self.canvas = $(canvasSelector);
@@ -245,6 +262,8 @@ $(function() {
 	// Wire up events
 	app = new App('#canvas');
 
+	app.loadDrawingList();
+	
 	$('#squarebutton').click(function(){app.shapeFactory = function() {
 		return new Square();
 	};});
@@ -260,7 +279,6 @@ $(function() {
 	$('#textbutton').click(function(){app.shapeFactory = function() {
 	  return new Textbox($('#font').val(), $('#fontSize').val(), $('#fontStyle').val());
 	};});
-
 	$('#textbox').keyup(function(e){
 		if(e.which === 13){
 			app.setText($('#textbox').val());
@@ -272,13 +290,15 @@ $(function() {
 	$('#undobutton').click(function(){app.undo();});
 	$('#redobutton').click(function(){app.redo();});
 	$('#savebutton').click(function(){app.save();});
-	$('#loadDrawingbutton').click(function(){app.loadDrawing();});
+	// $('#loadDrawingbutton').click(function(){app.loadDrawing();});
 	$('#loadDrawingListbutton').click(function(){app.loadDrawingList();});
 	$('#color').change(function(){app.setColor($(this).val());});
 	$('#width').change(function(){app.setWidth($(this).val());});
 	$("control_id").attr("checked",true);
-
+	
     var checked = document.getElementById("penbutton");
     checked.click();
 
+   
+	
 });

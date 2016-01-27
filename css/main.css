@@ -1,16 +1,19 @@
 body
 {
 	/*margin: 10px;*/
+	color:#4a4c49;
+	font-family: 'Impact, Charcoal, sans-serif';
 }
 
+/* canvas { background:url(../test.jpg); }
+*/
 
-.dropdown {
+.width-100 {
     width: 100px;
-
 }
 
 #toolbar {
-	background-color: rgba(102, 102, 102, 0.6);
+	background-color:#dedede;
 }
 #canvas {
 	display:block;
@@ -21,6 +24,42 @@ body
 	height : 100%;
 }
 
+#drawingList {
+	background-color: white;
+	opacity: 0.8;
+    height:130px;
+    overflow-x:scroll;
+}
+.drawingListTitle {
+	background-color: white;
+	opacity: 0.8;
+    height:30px;
+}
+
+
+li { 
+	list-style: none;
+	color: black; 
+	padding-left: 20px;
+}
+
+li:hover {
+	color:#ED8139;
+	text-decoration: none;
+}
+
+#squarebutton:hover {
+
+}
+/* 
+label {
+    text-align:center;
+	vertical-align:middle; 
+}*/
+
+.shapes {
+	justify-content: center;
+}
 .textfield {
     position: absolute;
     height: 50px;
@@ -34,3 +73,7 @@ body
 	height: 50px;
     width: 300px;
 }
+
+
+
+

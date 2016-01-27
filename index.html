@@ -6,7 +6,7 @@
 
 
 	<title>Draw</title>
-
+	
 	<script type="text/javascript" src="js/base.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
@@ -25,52 +25,59 @@
 
 </head>
 <body class="row">
-	<div class="col-md-10">
+	
+<div class="col-md-9 col-sm-8 col-xs-8">
 	  	<canvas id="canvas" ></canvas>
 	</div>
-
-	<div class="col-md-2">
+	<div class="col-md-3 col-sm-4 col-xs-4">
 		<div id="toolbar">
-				<input type="radio" name="tool" id="squarebutton" value="square"></input><label for="squarebutton">Square</label><br/>
-				<input type="radio" name="tool" id="circlebutton" value="circle"></input><label for="circlebutton">Circle</label><br/>
-				<input type="radio" name="tool" id="penbutton" value="pen"></input><label for="penbutton">Pen</label><br/>
-				<input type="radio" name="tool" id="linebutton" value="line"></input><label for="linebutton">Line</label><br/>
-				<input type="radio" name="tool" id="textbutton" value="text"></input><label for="textbutton">Text</label>
-				<input class="bfh-colorpicker" type="color" name="color" id="color" value="#ff0000"></input><br/>
+				<div class="shapes">
+					<img src="img/LogoDraw.png" alt="Draw" style="width:100%;">
+					<input type="image" src="img/icons/pen.gif" name="tool" id="penbutton" width="40" height="40" value="pen"></input>
+					<!-- <label for="penbutton">Pen</label><br/> -->
+					<input type="image" src="img/icons/Square.gif" name="tool" id="squarebutton" width="40" height="40" value="square"></input><!-- <label for="squarebutton" >Square</label><br/> -->
+					<input type="image" src="img/icons/circle.gif" name="tool" id="circlebutton" width="40" height="40" value="square"></input><!-- <label  for="circlebutton">Circle</label><br/> -->
 
-				<select class="form-control dropdown" id="fontStyle">
+					<input type="image" src="img/icons/line.gif" name="tool" id="linebutton" width="40" height="40" value="line"></input>
+					<!-- <label for="linebutton">Line</label><br/> -->
+					<input type="image" src="img/icons/move.gif" name="tool" id="movebutton" width="40" height="40" value="text"></input>
+
+
+					<input type="image" src="img/icons/text.gif" name="tool" id="textbutton" width="40" height="40" value="text"></input>
+
+					<!-- <input type="radio" src="text.gif" name="tool" id="textbutton" width="40" height="40" value="text"> -->
+
+				</div>
+				<br/>
+
+				<input class="bfh-colorpicker form-control width-100 " type="color" name="color" id="color" value="#ff0000"></input>
+
+				<select class="form-control width-100" id="fontStyle">
 	 				<option value="normal">Normal</option>
 	 				<option value="italic">Italic</option>
 	 				<option value="bold">Bold</option>
 				</select>
-				<!--
-				<select class="form-control dropdown" id="fontSize">
+				<!-- 
+				<select class="form-control width-100" id="fontSize">
 					<option value="10pt">10pt</option>
 					<option value="12pt">12pt</option>
 					<option value="14pt">14pt</option>
 					<option value="16pt">16pt</option>
 					<option value="32pt">32pt</option>
 					<option value="64pt">64pt</option>
-				</select>-->
-				<!--<select class="form-control dropdown" id="font">
+				</select>
+				<select class="form-control width-100" id="font">
 					<option value="Arial">Arial</option>
 					<option value="Comic Sans MS">Comic Sans</option>
 					<option value="Courier New">Courier New</option>
 					<option value="Trebuchet MS">Trebuchet MS</option>
 					<option value="Verdana">Verdana</option>
-				</select>-->
-				<div class="bfh-selectbox bfh-fontsizes" data-fontsize="12" id="fontSize"></div>
-				<div class="bfh-selectbox bfh-fonts" data-font="Arial" id="font"></div>
-				<input class="btn btn-default" type="button" name="clearbutton" id="clearbutton" value="clear"></input>
-				<input class="btn btn-default" type="button" name="tool" id="undobutton" value="undo"></input>
-				<input class="btn btn-default" type="button" name="tool" id="redobutton" value="redo"></input>
-				<input class="btn btn-default" type="button" name="tool" id="savebutton" value="save"></input>
-				<input class="btn btn-default" type="button" name="tool" id="loadDrawingbutton" value="loadDrawing"></input>
-				<input class="btn btn-default" type="button" name="tool" id="loadDrawingListbutton" value="loadList"></input>
+				</select> -->
 
+				<div class="bfh-selectbox bfh-fontsizes width-100" data-fontsize="12" id="fontSize"></div>
+				<div class="bfh-selectbox bfh-fonts width-100" data-font="Arial" id="font"></div>
 
-
-				<select class="form-control dropdown" id="width">
+				<select class="form-control width-100" id="width">
 					<option value="1">1px</option>
 					<option value="2">2px</option>
 					<option value="4">4px</option>
@@ -78,13 +85,23 @@
 					<option value="8">8px</option>
 					<option value="10">10px</option>
 				</select>
+
+				<input type="image" src="img/icons/undo.gif" id="undobutton" value="undo" width="40" height="40"></input>
+				<input type="image" src="img/icons/redo.gif" id="redobutton" value="redo" width="40" height="40"></input>
+
+				<input type="image" src="img/icons/clear.gif" id="clearbutton" value="clear" width="40" height="40"></input>
+				<input type="image" src="img/icons/save.gif"  type="button" name="tool" id="savebutton" value="Save Drawing" width="40" height="40"></input>
+				
+				<div class="drawingListTitle">Drawing list</div>
+				<div class="drawingList" id="drawingList"></div>
+				
 		</div>
 	</div>
+	
 
 	<div class="textfield">
 		<input type="text" id="textbox" autofocus/>
-	</div>
-	<!-- pos - absolute, zindex - 99, display - none, bæta við hniti í samræmi við alla síðuna, default hide, onclick show-->
+	</div>	<!-- pos - absolute, zindex - 99, display - none, bæta við hniti í samræmi við alla síðuna, default hide, onclick show-->
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
