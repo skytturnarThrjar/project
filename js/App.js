@@ -84,7 +84,7 @@ function App(canvasSelector) {
 		var allinputs = document.getElementsByTagName('input');
 		var buttons = new Array();
 		for(var i = 0; i < allinputs.length; i++) {
-			if(allinputs[i].type === 'image') {
+			if(allinputs[i].type === 'image' && allinputs[i].id !== 'movebutton') {
 				buttons.push(allinputs[i]);
 			}
 		}
@@ -114,22 +114,12 @@ function App(canvasSelector) {
 	};
 
 	self.move = function(e) {
-		console.log("movelala");
 		var hnit = self.getEventPoint(e);
 
 		for(var i = self.shapes.length - 1; i >= 0; i--){
-
-			console.log("before");
-			console.log(self.shapes[i].selected);
-			self.shapes[i].selectedObj(hnit.x, hnit.y);
-			console.log("after");
-			console.log("jhhhhhhhhhh",self.shapes[i].selectedObject);
-
+			self.shapes[i].selectedObj(hnit.x, hnit.y, self.canvasContext);
 			if(self.shapes[i].selectedObject){
-				console.log("fallauuuuuuuuuuuuuuuuuuuuuuuuukall");
-				console.log(self.shapes[i]);
 				sh = self.shapes[i];
-				// move
 				var moveObj = function(e) {
 					var pos = self.getEventPoint(e);
 					sh.moveObj(hnit, pos, self.canvasContext);
@@ -153,7 +143,6 @@ function App(canvasSelector) {
 				self.shapes[i].selectedObject = false;
 				break;
 			}
-			console.log("haett");
 		}
 
 		self.canvas.on({
@@ -402,11 +391,13 @@ $(function() {
 	  return new Textbox($('#font').val(), $('#fontSize').val(), $('#fontStyle').val());
 	};});
 	$('#textbox').keyup(function(e){
-		if(e.which === 13){
-			app.setText($('#textbox').val());
-			$('.textfield').hide();
-			$('#textbox').val("");
-		}
+			if(e.which === 13){
+				if($('#textbox').val().length !== 0) {
+					app.setText($('#textbox').val());
+					$('.textfield').hide();
+					$('#textbox').val("");
+				}
+			}
 	});
 	$('#clearbutton').click(function(){app.clear();});
 	$('#undobutton').click(function(){app.undo();});

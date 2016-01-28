@@ -17,7 +17,6 @@ var Shape = Base.extend({
 		this.text = '';
 	},
 
-
 	draw:function(canvas) {
 		if ( this.selected === true ) {
 			// show selection
