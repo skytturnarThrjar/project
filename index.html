@@ -51,7 +51,8 @@
 				</div>
 				<br/>
 
-				<input class="jscolor form-control width-100"  onchange="update(this.jscolor)" name="color" id="color" value="000000"></input>
+				<input class="jscolor form-control width-100 "  onchange="update(this.jscolor)" name="color" id="color" value="000000"></input>
+
 
 				<select class="form-control width-100" id="fontStyle">
 	 				<option value="normal">Normal</option>
@@ -91,10 +92,17 @@
 				<input type="image" src="img/icons/redo.gif" id="redobutton" value="redo" width="40" height="40"></input>
 
 				<input type="image" src="img/icons/clear.gif" id="clearbutton" value="clear" width="40" height="40"></input>
-				<input type="image" src="img/icons/save.gif"  type="button" name="tool" id="savebutton" value="Save Drawing" width="40" height="40"></input>
+				
+				<br/>
+				<div class="form-inline" >
+					<input type="image" src="img/icons/save.gif"  type="button" name="tool" id="savebutton" value="Save Drawing" width="40" height="40"></input>
+					<input class="form-control width-100" type="text" id="SaveDrawingTitle" placeholder="My drawing"/>
+				</div>
 
 				<div class="drawingListTitle">Drawing list</div>
 				<div class="drawingList" id="drawingList"></div>
+
+
 
 		</div>
 	</div>

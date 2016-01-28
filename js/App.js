@@ -215,10 +215,10 @@ function App(canvasSelector) {
 		self.redraw();
 	};
 
-	self.save = function() {
+	self.save = function(name) {
 		var stringifiedArray = JSON.stringify(self.shapes);
 			var param = { "user": "laufey14", // You should use your own username!
-				"name": "JAA", //title,
+				"name": name, //title,
 				"content": stringifiedArray,
 				"template": true
 			};
@@ -411,7 +411,11 @@ $(function() {
 	$('#clearbutton').click(function(){app.clear();});
 	$('#undobutton').click(function(){app.undo();});
 	$('#redobutton').click(function(){app.redo();});
-	$('#savebutton').click(function(){app.save();});
+	$('#savebutton').click(function(){app.save(document.getElementById('SaveDrawingTitle').value);
+
+});
+	console.log(document.getElementById('SaveDrawingTitle').outerText);
+
 	//$('#movebutton').click(function(e){app.move(e);});
 	// $('#loadDrawingbutton').click(function(){app.loadDrawing();});
 	$('#loadDrawingListbutton').click(function(){app.loadDrawingList();});
