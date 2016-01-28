@@ -13,7 +13,7 @@ var Shape = Base.extend({
 		this.radius = 0;
 		this.width = width;
 		this.selectedObject = false;
-		this.height = height;
+		this.height = 0;
 	},
 
 
