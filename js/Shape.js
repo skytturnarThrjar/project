@@ -14,6 +14,7 @@ var Shape = Base.extend({
 		this.width = width;
 		this.selectedObject = false;
 		this.height = 0;
+		this.text = '';
 	},
 
 

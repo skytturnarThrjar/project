@@ -309,6 +309,8 @@ function App(canvasSelector) {
 						shape.drawlineY = WhiteboardContents[i].drawlineY;
 						shape.radius = WhiteboardContents[i].radius;
 						shape.width = WhiteboardContents[i].width;
+						shape.text = WhiteboardContents[i].text;
+
 
 						self.shapes.push(shape);
 					}
