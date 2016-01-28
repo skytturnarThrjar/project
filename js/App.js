@@ -76,15 +76,28 @@ function App(canvasSelector) {
 	};
 
 	self.mousedown = function(e) {
+		var allinputs = document.getElementsByTagName('input');
+		var buttons = new Array();
+		for(var i = 0; i < allinputs.length; i++) {
+			if(allinputs[i].type === 'image') {
+				buttons.push(allinputs[i]);
+			}
+		}
 		document.getElementById('movebutton').onclick = function() {
 			movebuttonclicked = true;
 			console.log(movebuttonclicked);
 		};
+		for(var j = 0; j < buttons.length; j++) {
+			$(buttons[j]).click(function () {
+				movebuttonclicked = false;
+			});
+		}
+
+		console.log("movebutton" + movebuttonclicked);
 		if(self.shapeFactory !== null) {
 			console.log(movebuttonclicked);
 			if(movebuttonclicked === true) {
 				self.move(e);
-				movebuttonclicked = false;
 			}
 			else {
 				self.drawingStart(e);
