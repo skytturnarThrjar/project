@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="js/line.js"></script>
 	<script type="text/javascript" src="js/pen.js"></script>
 	<script type="text/javascript" src="js/bootstrap-formhelpers.js"></script>
+	<script type="text/javascript" src="js/jscolor.js"></script>
 
 	<link href="css/bootstrap-formhelpers.min.css" rel="stylesheet">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +51,7 @@
 				</div>
 				<br/>
 
-				<input class="bfh-colorpicker form-control width-100 " type="color" name="color" id="color" value="#ff0000"></input>
+				<input class="jscolor form-control width-100"  onchange="update(this.jscolor)" name="color" id="color" value="000000"></input>
 
 				<select class="form-control width-100" id="fontStyle">
 	 				<option value="normal">Normal</option>

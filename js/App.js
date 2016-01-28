@@ -6,6 +6,11 @@ function ShowWhiteboardDrawing(id) {
 	app.ShowDrawing(id);
 }
 
+function update(jscolor) {
+    // 'jscolor' instance can be used as a string
+    app.setColor(jscolor);
+}
+
 function App(canvasSelector) {
 	canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -338,7 +343,7 @@ function App(canvasSelector) {
 	};
 
 	self.setColor = function(color) {
-		self.color = color;
+		self.color = '#' + color;
 	};
 
 		self.setWidth = function(width) {
@@ -364,7 +369,7 @@ function App(canvasSelector) {
 
 
 		// Set defaults
-		self.color = '#ff0000';
+		self.color = '#000000';
 		self.width = 1;
 		// TODO: Set sensible defaults ...
 	};
