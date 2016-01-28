@@ -10,7 +10,7 @@ var Textbox = Shape.extend({
   },
 
   startDrawing:function(point) {
-      $('.textfield').css({"top": this.pos.y, "left": this.pos.x}).show();
+    $('.textfield').css({"top": this.pos.y, "left": this.pos.x}).show();
   },
 
   draw: function(canvas) {

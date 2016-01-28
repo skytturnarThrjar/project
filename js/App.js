@@ -13,8 +13,7 @@ function update(jscolor) {
 
 function App(canvasSelector) {
 	canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
+  canvas.height = window.innerHeight;
 	var self = this;
 	self.getEventPoint = function(e) {
 		return new Point(e.pageX - self.canvasOffset.x,e.pageY - self.canvasOffset.y);
@@ -64,6 +63,7 @@ function App(canvasSelector) {
 
 		//console.log('shape', shape.name);
 		if(shape.name === 'Textbox'){
+			drawing(e);
 			drawingStop(e);
 		}
 		// Add drawing and drawingStop functions to the mousemove and mouseup events
@@ -348,7 +348,7 @@ function App(canvasSelector) {
 		self.color = '#' + color;
 	};
 
-		self.setWidth = function(width) {
+	self.setWidth = function(width) {
 		self.width = width;
 	};
 
@@ -372,7 +372,7 @@ function App(canvasSelector) {
 
 		// Set defaults
 		self.color = '#000000';
-		self.width = 1;
+		self.width = 2;
 		// TODO: Set sensible defaults ...
 	};
 
