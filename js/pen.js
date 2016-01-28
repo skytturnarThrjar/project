@@ -29,4 +29,45 @@ var Pen = Shape.extend({
 		this.size.x = point.x;
 		this.size.y = point.y;
 	},
+
+	selectedObj: function(m, n) {
+		var xMax = 0;
+		var xMin = 1000;//canvasMax
+		var yMax = 0;
+		var yMin = 1000;
+
+		for(var i = 0; i < this.drawlineX.length; i++) {
+			if(this.drawlineX[i] < xMin){
+				xMin = this.drawlineX[i];
+			}
+
+			if(this.drawlineX[i] > xMax){
+				xMax = this.drawlineX[i];
+			}
+
+			if(this.drawlineY[i] < yMin){
+				yMin = this.drawlineY[i];
+			}
+
+			if(this.drawlineY[i] > yMax){
+				yMax = this.drawlineY[i];
+			}
+		}
+
+		if(xMin < m && xMax > m){
+			if(yMin < n && yMax > n){
+				this.selectedObject = true;
+			}
+		}
+	},
+	moveObj: function(startp, point) {
+
+		this.pos.x = point.x + (this.pos.x - startp.x);
+		this.pos.y = point.y + (this.pos.y - startp.y);
+
+		for(var i = 0; i < this.drawlineX.length; i++) {
+			this.drawlineX[i] = point.x + (this.drawlineX[i] - startp.x);
+			this.drawlineY[i] = point.y + (this.drawlineY[i] - startp.y);
+		}
+	}
 });

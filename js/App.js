@@ -1,5 +1,8 @@
- function ShowWhiteboardDrawing(id) {
- 	app.clear()
+var movebuttonclicked = false;
+var moving = false;
+
+function ShowWhiteboardDrawing(id) {
+ 	app.clear();
 	app.ShowDrawing(id);
 }
 
@@ -41,7 +44,7 @@ function App(canvasSelector) {
 			self.shapes.push(shape);
 			//console.log(shape);
 
-			// Empty the redo array 
+			// Empty the redo array
 			self.undoShapes = [];
 			shape.added(self.canvasContext);
 
@@ -59,11 +62,11 @@ function App(canvasSelector) {
 			drawingStop(e);
 		}
 		// Add drawing and drawingStop functions to the mousemove and mouseup events
-		self.canvas.on({	
+		self.canvas.on({
 			mousemove:drawing,
 			mouseup:drawingStop
 		});
-		window.addEventListener('resize', CanvasResizeFunction, false);	
+		window.addEventListener('resize', CanvasResizeFunction, false);
 
 		function CanvasResizeFunction() {
 			canvas.width = window.innerWidth;
@@ -73,13 +76,114 @@ function App(canvasSelector) {
 	};
 
 	self.mousedown = function(e) {
+		document.getElementById('movebutton').onclick = function() {
+			movebuttonclicked = true;
+			console.log(movebuttonclicked);
+		};
 		if(self.shapeFactory !== null) {
-			self.drawingStart(e);
+			console.log(movebuttonclicked);
+			if(movebuttonclicked === true) {
+				self.move(e);
+				movebuttonclicked = false;
+			}
+			else {
+				self.drawingStart(e);
+			}
 		} else {
 		}
 
 		self.redraw();
 	};
+
+	self.move = function(e) {
+		console.log("movelala");
+		var hnit = self.getEventPoint(e);
+
+		for(var i = self.shapes.length - 1; i >= 0; i--){
+
+			console.log("before");
+			console.log(self.shapes[i].selected);
+			self.shapes[i].selectedObj(hnit.x, hnit.y);
+			console.log("after");
+			console.log("jhhhhhhhhhh",self.shapes[i].selectedObject);
+
+			if(self.shapes[i].selectedObject){
+				console.log("fallauuuuuuuuuuuuuuuuuuuuuuuuukall");
+				console.log(self.shapes[i]);
+				sh = self.shapes[i];
+				// move
+				var moveObj = function(e) {
+					var pos = self.getEventPoint(e);
+					sh.moveObj(hnit, pos, self.canvasContext);
+					hnit = pos;
+					self.redraw();
+					//sh.draw(self.canvasContext);
+				};
+
+				var moveStop = function(e) {
+					var pos = self.getEventPoint(e);
+					//sh.stopMoving(pos, self.canvasContext);
+
+					self.canvas.off({
+						mousemove:moveObj,
+						mouseup:moveStop
+					});
+					self.redraw();
+				};
+
+				self.redraw();
+				self.shapes[i].selectedObject = false;
+				break;
+			}
+			console.log("haett");
+		}
+
+		self.canvas.on({
+			mousemove:moveObj,
+			mouseup:moveStop
+		});
+	};
+/*
+	self.move = function(e) {
+	  var coordinates = self.getEventPoint(e);//þar sem við klikkum niður
+		for(var i = self.shapes.length - 1; i >= 0; i--) {
+			self.shapes[i].selectedObj(coordinates.x, coordinates.y);
+			if(self.shapes[i].selectedObject === true) {
+				var sh = self.shapes[i];
+				canvas.onmousedown = function (e) {
+					moving = true;
+					canvas.onmousemove = function (e) {
+						if(moving) {
+							var pos = self.getEventPoint(e);
+							sh.moveObj(coordinates, pos, self.canvasContext);
+							coordinates = pos;
+							self.redraw();
+						}
+					};
+					canvas.onmouseup = function (e) {
+						moving = false;
+						self.redraw();
+					};
+				};
+				//mousemove - draw
+				$(canvas).mousemove( function() {
+						console.log("mousemove");
+						//draw
+						var pos = self.getEventPoint(e);
+						sh.moveObj(coordinates, pos, self.canvasContext);
+						self.redraw();
+				});
+				$(canvas).mouseup( function() {
+					console.log("mouseup");
+					selectedObject = false;
+					//moving = false;*/
+				//});
+		//	}
+				//mouseup - moving = false
+				//færa objectið á meðan mousemove, teikna alltaf upp aftur og aftur á nýjum stað
+				//leið og mouseup þá viljum við hætta að færa
+		//}
+//	};
 
 	self.redraw = function() {
 		self.canvasContext.clearRect(0, 0, self.canvasContext.canvas.width, self.canvasContext.canvas.height);
@@ -155,8 +259,6 @@ function App(canvasSelector) {
 
 				}
 			});
-				
-
 	};
 
 	self.ShowDrawing = function ShowDrawing(id) {
@@ -234,7 +336,7 @@ function App(canvasSelector) {
 		self.shapes[self.shapes.length - 1].text = text;
 		self.redraw();
 	};
- 
+
 	self.init = function() {
 		// Initialize App
 		self.canvas = $(canvasSelector);
@@ -263,7 +365,7 @@ $(function() {
 	app = new App('#canvas');
 
 	app.loadDrawingList();
-	
+
 	$('#squarebutton').click(function(){app.shapeFactory = function() {
 		return new Square();
 	};});
@@ -290,15 +392,13 @@ $(function() {
 	$('#undobutton').click(function(){app.undo();});
 	$('#redobutton').click(function(){app.redo();});
 	$('#savebutton').click(function(){app.save();});
+	//$('#movebutton').click(function(e){app.move(e);});
 	// $('#loadDrawingbutton').click(function(){app.loadDrawing();});
 	$('#loadDrawingListbutton').click(function(){app.loadDrawingList();});
 	$('#color').change(function(){app.setColor($(this).val());});
 	$('#width').change(function(){app.setWidth($(this).val());});
 	$("control_id").attr("checked",true);
-	
+
     var checked = document.getElementById("penbutton");
     checked.click();
-
-   
-	
 });

@@ -19,6 +19,32 @@ var Textbox = Shape.extend({
     canvas.font = (this.fontstyle + " " + this.fontsize + "pt " + this.font);
     canvas.fillStyle = this.color;
     canvas.fillText(this.text, this.pos.x, this.pos.y);
+    this.width = canvas.measureText(this.text).width + this.pos.y;
+    this.height = this.pos.x - canvas.measureText(this.text).width;
+    //console.log("width" + this.width);
+    //console.log("height" + this.height);
     canvas.closePath();
+  },
+  selectedObj: function(m, n) {
+    console.log("m" + m);
+    console.log("n" + n);
+    console.log(this.pos.x + " " + (this.pos.x + this.width ));
+    console.log(this.pos.y + " " + (this.pos.y + this.height ));
+    if(m > this.pos.y && m < (this.pos.y + this.width)) {
+      console.log("BLABLAB");
+      if(n > this.pos.x && n < (this.pos.x + this.height)) {
+        console.log("hehehe");
+        this.selectedObject = true;
+      }
+      if(n < this.pos.y && n > (this.pos.y + this.height)) {
+        console.log("labababababababa");
+      }
+    }
+  },
+  moveObj: function(start, end) {
+    var distX = start.x - end.x;
+    var distY = start.y - end.y;
+    this.pos.x = end.x;
+    this.pos.y = end.y;
   }
 });

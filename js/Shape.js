@@ -12,6 +12,8 @@ var Shape = Base.extend({
 		this.drawlineY = new Array();
 		this.radius = 0;
 		this.width = width;
+		this.selectedObject = false;
+		this.height = height;
 	},
 
 
@@ -36,4 +38,12 @@ var Shape = Base.extend({
 	added: function(canvas) {
 
 	},
+
+	selectedObj: function(m, n) {
+
+	},
+
+	moveObj: function(start, end) {
+
+	}
 });
