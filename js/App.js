@@ -119,7 +119,7 @@ function App(canvasSelector) {
 		for(var i = self.shapes.length - 1; i >= 0; i--){
 			self.shapes[i].selectedObj(hnit.x, hnit.y, self.canvasContext);
 			if(self.shapes[i].selectedObject){
-				sh = self.shapes[i];
+				var sh = self.shapes[i];
 				var moveObj = function(e) {
 					var pos = self.getEventPoint(e);
 					sh.moveObj(hnit, pos, self.canvasContext);
