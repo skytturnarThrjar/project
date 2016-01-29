@@ -32,8 +32,8 @@ var Textbox = Shape.extend({
 
   moveObj: function(start, end) {
     var distX = start.x - end.x;
-    var distY = start.y - end.y;
-    this.pos.x = end.x;
-    this.pos.y = end.y;
+		var distY = start.y - end.y;
+		this.pos.x -= distX;
+		this.pos.y -= distY;
   }
 });
