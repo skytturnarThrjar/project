@@ -8,6 +8,7 @@ var Circle = Shape.extend({
 		canvas.strokeStyle = this.color;
 		canvas.lineWidth = this.width;
 		canvas.beginPath();
+		canvas.setLineDash([0]);
 		canvas.arc( this.pos.x , this.pos.y, this.radius, 0, 2 * Math.PI, false );
 		canvas.stroke();
 		canvas.closePath();
@@ -25,10 +26,8 @@ var Circle = Shape.extend({
 		var yPos = this.pos.y - this.radius;
 		var ySize = this.pos.y + this.radius;
 
-		if( xPos < m && xSize > m){
-			if(yPos < n && ySize > n){
-				this.selectedObject = true;
-			}
+		if((xPos < m && xSize > m) && (yPos < n && ySize > n)){
+			this.selectedObject = true;
 		}
 	},
 	moveObj: function(start, end) {
@@ -36,8 +35,21 @@ var Circle = Shape.extend({
 		var distY = start.y - end.y;
 		this.pos.x = end.x;
 		this.pos.y = end.y;
+	},
+
+	selectedFill: function(canvas) {
+
+		var xPos = this.pos.x - this.radius;
+		var xSize = this.pos.x + this.radius;
+		var yPos = this.pos.y - this.radius;
+		var ySize = this.pos.y + this.radius;
+
+		canvas.strokeStyle = "#000000";
+		canvas.lineWidth = 0.25;
+		canvas.beginPath();
+		canvas.setLineDash([6]);
+		canvas.strokeRect(xPos, yPos, xSize - xPos, ySize - yPos);
+		this.base(canvas);
+		canvas.closePath();
 	}
-
-
-
 });

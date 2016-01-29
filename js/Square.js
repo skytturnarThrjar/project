@@ -23,7 +23,6 @@ var Square = Shape.extend({
 			this.pos.x += this.size.x;
 			this.size.x = Math.abs(this.size.x);
 		}
-
 		if(this.size.y < 0) {
 			this.pos.y += this.size.y;
 			this.size.y = Math.abs(this.size.y);
@@ -31,12 +30,8 @@ var Square = Shape.extend({
 	},
 
 	selectedObj: function(m, n) {
-		if(m > this.pos.x && m < (this.size.x + this.pos.x) ){
-			console.log("if sent");
-			if(n > this.pos.y && n < (this.size.y + this.pos.y)){
-				console.log("if sent 2");
-				this.selectedObject = true;
-				}
+		if((m > this.pos.x && m < (this.size.x + this.pos.x)) && (n > this.pos.y && n < (this.size.y + this.pos.y))) {
+			this.selectedObject = true;
   	}
 	},
 

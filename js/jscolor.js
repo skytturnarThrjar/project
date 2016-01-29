@@ -855,7 +855,7 @@ var jsc = {
 					break;
 				}
 			};
-			
+
 			paletteObj.elm = vmlContainer;
 			paletteObj.draw = drawFunc;
 		}
@@ -926,7 +926,7 @@ var jsc = {
 				grad.color = color1;
 				grad.color2 = color2;
 			};
-			
+
 			sliderObj.elm = vmlContainer;
 			sliderObj.draw = drawFunc;
 		}
@@ -1009,7 +1009,7 @@ var jsc = {
 		this.crossSize = 8; // px
 		this.closable = false; // whether to display the Close button
 		this.closeText = 'Close';
-		this.buttonColor = '#000000'; // CSS color
+		this.buttonColor = '#69BFD9'; // CSS color
 		this.buttonHeight = 18; // px
 		this.padding = 12; // px
 		this.backgroundColor = '#FFFFFF'; // CSS color

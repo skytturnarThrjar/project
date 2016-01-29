@@ -14,6 +14,7 @@ var Textbox = Shape.extend({
 
   draw: function(canvas) {
     canvas.beginPath();
+    canvas.setLineDash([0]);
     canvas.font = (this.fontstyle + " " + this.fontsize + "pt " + this.font);
     canvas.fillStyle = this.color;
     canvas.fillText(this.text, this.pos.x, this.pos.y);
@@ -23,10 +24,8 @@ var Textbox = Shape.extend({
   },
 
   selectedObj: function(m, n, canvas) {
-    if(m >= this.pos.x && m <= this.width) {
-      if(n <= this.pos.y && n >= this.height) {
+    if((m >= this.pos.x && m <= this.width) && (n <= this.pos.y && n >= this.height)) {
         this.selectedObject = true;
-      }
     }
   },
 
@@ -35,5 +34,15 @@ var Textbox = Shape.extend({
 		var distY = start.y - end.y;
 		this.pos.x -= distX;
 		this.pos.y -= distY;
-  }
+  },
+
+  selectedFill: function(canvas) {
+    canvas.strokeStyle = "#000000";
+    canvas.lineWidth = 0.25;
+    canvas.beginPath();
+    canvas.setLineDash([6]);
+    canvas.strokeRect(this.size.x - this.pos.x, this.size.y - this.pos.y, this.width, this.height ); //(this.pos.x, this.pos.y, this.width - this.pos.x, this.height - this.pos.y );
+    this.base(canvas);
+    canvas.closePath();
+  },
 });

@@ -43,6 +43,10 @@ var Shape = Base.extend({
 
 	},
 
+	selectedFill: function(canvas) {
+		
+	},
+
 	moveObj: function(start, end) {
 
 	}
