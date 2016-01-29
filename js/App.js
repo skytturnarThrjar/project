@@ -390,6 +390,9 @@ $(function() {
 	$('#textbutton').click(function(){app.shapeFactory = function() {
 	  return new Textbox($('#font').val(), $('#fontSize').val(), $('#fontStyle').val());
 	};});
+	$('#spraybutton').click(function(){ app.shapeFactory = function() {
+		return new Spray();
+	};});
 	$('#textbox').keyup(function(e){
 			if(e.which === 13){
 				if($('#textbox').val().length !== 0) {
