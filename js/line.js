@@ -32,10 +32,11 @@ var Line = Shape.extend({
 	},
 
 	selectedObj: function(m, n) {
-		if(this.pos.x < this.size.x) {
-			if(this.pos.x < m && this.size.x > m) {
-				if(this.pos.y < this.size.y) {
-					if(this.pos.y < n && this.size.y > n) {
+
+		if(this.startX < this.size.x) {
+			if(this.startX < m && this.size.x > m) {
+				if(this.startY < this.size.y) {
+					if(this.startY < n && this.size.y > n) {
 						this.selectedObject = true;
 					}
 				}
@@ -47,14 +48,14 @@ var Line = Shape.extend({
 			}
 		}
 		else {
-			if(this.size.x < m && this.pos.x > m) {
-				if(this.pos.y < this.size.y) {
-					if(this.pos.y < n && this.size.y > n) {
+			if(this.size.x < m && this.startX > m) {
+				if(this.startY < this.size.y) {
+					if(this.startY < n && this.size.y > n) {
 						this.selectedObject = true;
 					}
 				}
 				else{
-					if(this.size.y < n && this.pos.y > n){
+					if(this.size.y < n && this.startY > n){
 						this.selectedObject = true;
 					}
 				}
