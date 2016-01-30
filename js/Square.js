@@ -8,6 +8,7 @@ var Square = Shape.extend({
 		canvas.strokeStyle = this.color;
 		canvas.lineWidth = this.width;
 		canvas.beginPath();
+		canvas.setLineDash([0]);
 		canvas.strokeRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
 		this.base(canvas);
 		canvas.closePath();
