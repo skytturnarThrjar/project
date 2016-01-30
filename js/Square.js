@@ -49,7 +49,7 @@ var Square = Shape.extend({
 		canvas.lineWidth = 0.5;
 		canvas.beginPath();
 		canvas.setLineDash([4]);
-		canvas.strokeRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
+		canvas.strokeRect(this.pos.x - 3, this.pos.y - 3, this.size.x + 6, this.size.y + 6);
 		this.base(canvas);
 		canvas.closePath();
 	}
