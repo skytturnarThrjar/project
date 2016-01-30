@@ -45,9 +45,9 @@ var Circle = Shape.extend({
 		var ySize = this.pos.y + this.radius;
 
 		canvas.strokeStyle = "#000000";
-		canvas.lineWidth = 0.25;
+		canvas.lineWidth = 0.5;
 		canvas.beginPath();
-		canvas.setLineDash([6]);
+		canvas.setLineDash([4]);
 		canvas.strokeRect(xPos, yPos, xSize - xPos, ySize - yPos);
 		this.base(canvas);
 		canvas.closePath();

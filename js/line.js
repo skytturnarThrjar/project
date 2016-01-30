@@ -74,9 +74,9 @@ var Line = Shape.extend({
 
 	selectedFill: function(canvas) {
 		canvas.strokeStyle = "#000000";
-		canvas.lineWidth = 0.25;
+		canvas.lineWidth = 0.5;
 		canvas.beginPath();
-		canvas.setLineDash([6]);
+		canvas.setLineDash([4]);
 		canvas.strokeRect(this.startX, this.startY, (this.size.x - this.startX ), (this.size.y- this.startY));
 		this.base(canvas);
 		canvas.closePath();

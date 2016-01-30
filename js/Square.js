@@ -41,5 +41,16 @@ var Square = Shape.extend({
 		var distY = start.y - end.y;
 		this.pos.x -= distX;
 		this.pos.y -= distY;
+	},
+
+	selectedFill: function(canvas) {
+
+		canvas.strokeStyle = "#000000";
+		canvas.lineWidth = 0.5;
+		canvas.beginPath();
+		canvas.setLineDash([4]);
+		canvas.strokeRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
+		this.base(canvas);
+		canvas.closePath();
 	}
 });

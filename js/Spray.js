@@ -97,9 +97,9 @@ selectedObj: function(m, n) {
 		}
 		
 		canvas.strokeStyle = "#000000";
-		canvas.lineWidth = 0.25;
+		canvas.lineWidth = 0.5;
 		canvas.beginPath();
-		canvas.setLineDash([6]);
+		canvas.setLineDash([4]);
 		canvas.strokeRect(xMin, yMin, (xMax - xMin) , (yMax - yMin));
 		this.base(canvas);
 		canvas.closePath();

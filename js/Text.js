@@ -38,9 +38,9 @@ var Textbox = Shape.extend({
 
   selectedFill: function(canvas) {
     canvas.strokeStyle = "#000000";
-    canvas.lineWidth = 0.25;
+    canvas.lineWidth = 0.5;
     canvas.beginPath();
-    canvas.setLineDash([6]);
+    canvas.setLineDash([4]);
     canvas.strokeRect(this.pos.x, this.pos.y, this.width - this.pos.x, this.height - this.pos.y ); //canvas.strokeRect(this.size.x - this.pos.x, this.size.y - this.pos.y, this.width, this.height );
     this.base(canvas);
     canvas.closePath();
