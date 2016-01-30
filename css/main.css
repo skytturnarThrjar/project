@@ -6,6 +6,11 @@ body
 
 }
 
+label {
+	position: absolute;
+	padding-left: 110px;
+	padding-top: 10px;
+}
 /* canvas { background:url(../test.jpg); }
 */
 @font-face {
@@ -17,14 +22,16 @@ body
     width: 100px;
 }
 
-#toolbar {
+/*#toolbar {
 	background-color:#dedede;
-}
+}*/
 #canvas {
 	display:block;
 }
 
 #toolbar {
+	background-color:#dedede;
+	margin: 0;
 	padding: 10px;
 	height : 100%;
 }
@@ -44,13 +51,11 @@ body
     padding-left: 20px;
     border-bottom: solid;
     border-bottom-width: 1px;
-
 }
 
-
-li { 
+li {
 	list-style: none;
-	color: black; 
+	color: black;
 	padding-left: 20px;
 }
 
@@ -62,10 +67,10 @@ li:hover {
 #squarebutton:hover {
 
 }
-/* 
+/*
 label {
     text-align:center;
-	vertical-align:middle; 
+	vertical-align:middle;
 }*/
 
 .shapes {
@@ -82,14 +87,12 @@ label {
 #textbox{
 	font-size: 20pt;
 	height: 50px;
-    width: 300px;
+  width: 300px;
 }
 
 #SaveDrawingTitle {
 	margin-bottom: 10px;
 }
 #savebutton {
-	    margin-bottom: -10px;
-
+	margin-bottom: -12px;
 }
-

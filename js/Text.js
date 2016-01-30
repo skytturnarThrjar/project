@@ -1,9 +1,10 @@
 var Textbox = Shape.extend({
 
-  constructor: function(font, fontsize, fontstyle) {
+  //þetta þyrfti að sleppa þvi að taka inn dótið held ég
+  constructor: function(font, fontSize, fontstyle) {
     this.base("Textbox");
     this.font = font;
-    this.fontsize = fontsize;
+    this.fontsize = fontSize;
     this.fontstyle = fontstyle;
     this.text = '';
   },
@@ -44,5 +45,5 @@ var Textbox = Shape.extend({
     canvas.strokeRect(this.pos.x, this.pos.y, this.width - this.pos.x, this.height - this.pos.y ); //canvas.strokeRect(this.size.x - this.pos.x, this.size.y - this.pos.y, this.width, this.height );
     this.base(canvas);
     canvas.closePath();
-  },
+  }
 });

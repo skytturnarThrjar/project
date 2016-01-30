@@ -35,28 +35,41 @@
 					<img src="img/LogoDraw.png" alt="Draw" style="width:100%;">
 					<input type="image" src="img/icons/pen.gif" name="tool" id="penbutton" width="40" height="40" value="pen"></input>
 					<!-- <label for="penbutton">Pen</label><br/> -->
+					<input type="image" src="img/icons/spray.gif" name="tool" id="spraybutton" width="40" height="40" value="text"></input>
+					<input type="image" src="img/icons/line.gif" name="tool" id="linebutton" width="40" height="40" value="line"></input>
 					<input type="image" src="img/icons/Square.gif" name="tool" id="squarebutton" width="40" height="40" value="square"></input><!-- <label for="squarebutton" >Square</label><br/> -->
 					<input type="image" src="img/icons/circle.gif" name="tool" id="circlebutton" width="40" height="40" value="square"></input><!-- <label  for="circlebutton">Circle</label><br/> -->
-					<input type="image" src="img/icons/line.gif" name="tool" id="linebutton" width="40" height="40" value="line"></input>
 					<!-- <label for="linebutton">Line</label><br/> -->
-					<input type="image" src="img/icons/move.gif" name="tool" id="movebutton" width="40" height="40" value="text"></input>
 					<input type="image" src="img/icons/text.gif" name="tool" id="textbutton" width="40" height="40" value="text"></input>
-					<input type="image" src="img/icons/spray.gif" name="tool" id="spraybutton" width="40" height="40" value="text"></input>
+					<input type="image" src="img/icons/move.gif" name="tool" id="movebutton" width="40" height="40" value="text"></input>
 					<!-- <input type="radio" src="text.gif" name="tool" id="textbutton" width="40" height="40" value="text"> -->
 				</div>
 				<br/>
 
 				<input class="jscolor form-control width-100 "  onchange="update(this.jscolor)" name="color" id="color" value="69BFD9"></input>
 
-				<select class="form-control width-100 bfh-selectbox" id="fontStyle">
+				<label for="fontStyle">Font Style</label>
+				<select class="form-control width-100 bfh-selectbox fontStyle" id="fontStyle">
 	 				<option value="normal">Normal</option>
 	 				<option value="italic">Italic</option>
 	 				<option value="bold">Bold</option>
 				</select>
-
+				<label for="fontSize" class="fontSize">Font Size</label>
 				<div class="bfh-selectbox bfh-fontsizes width-100" data-fontsize="12" id="fontSize"></div>
+ 				<!--
+				<select class="form-control bfh-fontsizes width-100" data-fontsize="12" id="fontSize">
+					<option value="8">8px</option>
+					<option value="10">10px</option>
+					<option value="12">12px</option>
+					<option value="14">14px</option>
+					<option value="50">32px</option>
+					<option value="60">48px</option>
+					<option value="60">64px</option>
+				</select>-->
+				<label for="font" class="font">Font</label>
 				<div class="bfh-selectbox bfh-fonts width-100" data-font="Arial" id="font"></div>
 
+				<label for="width" id="width">Line Width</label>
 				<select class="form-control width-100 bfh-selectbox" id="width">
 					<option value="1">1px</option>
 					<option value="2">2px</option>
@@ -71,8 +84,8 @@
 				<input type="image" src="img/icons/clear.gif" id="clearbutton" value="clear" width="40" height="40"></input>
 				<br/>
 				<div class="form-inline" >
-					<input type="image" src="img/icons/save.gif"  type="button" name="tool" id="savebutton" value="Save Drawing" width="40" height="40"></input>
 					<input class="form-control width-100" type="text" id="SaveDrawingTitle" placeholder="My drawing"/>
+					<input type="image" src="img/icons/save.gif"  type="button" name="tool" id="savebutton" value="Save Drawing" width="40" height="40"></input>
 				</div>
 
 				<div class="drawingListTitle">Drawing list</div>
@@ -81,7 +94,7 @@
 	</div>
 
 	<div class="textfield">
-		<input type="text" id="textbox" autofocus/>
+		<input type="text" id="textbox" autofocus onblur="this.focus()"/>
 	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

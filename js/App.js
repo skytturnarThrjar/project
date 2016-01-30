@@ -26,6 +26,7 @@ function App(canvasSelector) {
 		shape.pos = startPos;
 		shape.color = self.color;
 		shape.width = self.width;
+    //shape.fontsize = self.fontsize;
 		shape.startDrawing(startPos,self.canvasContext);
 
 		var drawing = function(e) {
@@ -259,6 +260,7 @@ function App(canvasSelector) {
 						shape.radius = WhiteboardContents[i].radius;
 						shape.width = WhiteboardContents[i].width;
 						shape.text = WhiteboardContents[i].text;
+            //shape.fontsize = WhiteboardContents[i].fontsize;
 
 						self.shapes.push(shape);
 					}
@@ -300,7 +302,12 @@ function App(canvasSelector) {
 		self.shapes[self.shapes.length - 1].text = text;
 		self.redraw();
 	};
-
+/*
+  self.setFontsize = function(fontsize) {
+    self.fontsize = fontsize;
+    self.redraw();
+  };
+*/
 	self.init = function() {
 		// Initialize App
 		self.canvas = $(canvasSelector);
@@ -316,6 +323,7 @@ function App(canvasSelector) {
 		// Set defaults
 		self.color = '#69BFD9';
 		self.width = 2;
+    //self.fontsize = "12";
 	};
 
 	self.init();
@@ -328,7 +336,7 @@ $(function() {
 	app.loadDrawingList();
 
 	$('#squarebutton').click(function() {
-		app.shapeFactory = function() {
+    app.shapeFactory = function() {
 			return new Square();
 		};
 	});
@@ -358,13 +366,13 @@ $(function() {
 		};
 	});
 	$('#textbox').keyup(function(e){
-			if(e.which === 13){
-				if($('#textbox').val().length !== 0) {
-					app.setText($('#textbox').val());
-					$('.textfield').hide();
-					$('#textbox').val("");
-				}
+    if(e.which === 13){
+			if($('#textbox').val().length !== 0) {
+				app.setText($('#textbox').val());
+				$('.textfield').hide();
+				$('#textbox').val("");
 			}
+		}
 	});
 	$('#clearbutton').click(function(){app.clear();});
 	$('#undobutton').click(function(){app.undo();});
@@ -376,6 +384,7 @@ $(function() {
 	$('#loadDrawingListbutton').click(function(){app.loadDrawingList();});
 	$('#color').change(function(){app.setColor($(this).val());});
 	$('#width').change(function(){app.setWidth($(this).val());});
+  //$('#fontSize').change(function(){app.setFontsize($(this).val());});
 	$("control_id").attr("checked",true);
 
   var checked = document.getElementById("penbutton");

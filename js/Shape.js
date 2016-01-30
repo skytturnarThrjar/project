@@ -1,5 +1,6 @@
 var Shape = Base.extend({
 
+	//fontsize inní þetta
 	constructor:function(name,pos,color,width) {
 		this.name = name;
 		this.pos = pos;
@@ -15,6 +16,7 @@ var Shape = Base.extend({
 		this.selectedObject = false;
 		this.height = 0;
 		this.text = '';
+		//this.fontsize = fontsize;
 	},
 
 	draw:function(canvas) {
@@ -44,7 +46,7 @@ var Shape = Base.extend({
 	},
 
 	selectedFill: function(canvas) {
-		
+
 	},
 
 	moveObj: function(start, end) {
