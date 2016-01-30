@@ -20,6 +20,7 @@ function App(canvasSelector) {
 	};
 
 	self.drawingStart = function(e) {
+		console.log("start");
 		var startPos = self.getEventPoint(e);
 		var shape = self.shapeFactory();
 		shape.pos = startPos;
@@ -41,9 +42,12 @@ function App(canvasSelector) {
 			shape.stopDrawing(pos,self.canvasContext);
 			self.shapes.push(shape);
 
+			shape.added(self.canvasContext);
+
 			// Empty the redo array
 			self.undoShapes = [];
-			shape.added(self.canvasContext);
+
+
 
 			// Remove drawing and drawingStop functions from the mouse events
 			self.canvas.off({
@@ -54,16 +58,18 @@ function App(canvasSelector) {
 			self.redraw();
 		};
 
-		if(shape.name === 'Textbox'){
-			drawing(e);
-			drawingStop(e);
-		}
-
 		// Add drawing and drawingStop functions to the mousemove and mouseup events
 		self.canvas.on({
 			mousemove:drawing,
 			mouseup:drawingStop
 		});
+
+		if(shape.name === 'Textbox'){
+			drawing(e);
+			drawingStop(e);
+		} 
+
+		//resize the canvas on window resize
 		window.addEventListener('resize', CanvasResizeFunction, false);
 
 		function CanvasResizeFunction() {
