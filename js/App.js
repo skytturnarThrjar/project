@@ -87,10 +87,13 @@ function App(canvasSelector) {
 			}
 		}
 		document.getElementById('movebutton').onclick = function() {
+      document.getElementById('canvas').style.cursor = "move";
 			movebuttonclicked = true;
 		};
+
 		for(var j = 0; j < buttons.length; j++) {
 			$(buttons[j]).click(function () {
+        document.getElementById('canvas').style.cursor = "default";
 				movebuttonclicked = false;
 			});
 		}
