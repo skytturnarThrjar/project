@@ -47,8 +47,6 @@ function App(canvasSelector) {
 			// Empty the redo array
 			self.undoShapes = [];
 
-
-
 			// Remove drawing and drawingStop functions from the mouse events
 			self.canvas.off({
 				mousemove:drawing,
@@ -67,7 +65,7 @@ function App(canvasSelector) {
 		if(shape.name === 'Textbox'){
 			drawing(e);
 			drawingStop(e);
-		} 
+		}
 
 		//resize the canvas on window resize
 		window.addEventListener('resize', CanvasResizeFunction, false);
@@ -96,6 +94,19 @@ function App(canvasSelector) {
 				movebuttonclicked = false;
 			});
 		}
+
+    document.getElementById('toolbar').onclick = function() {
+      $('#textbox').val("");
+      $('.textfield').hide();
+    };
+    document.getElementById('font').onclick = function() {
+      $('#textbox').val("");
+      $('.textfield').hide();
+    };
+    document.getElementById('fontSize').onclick = function() {
+      $('#textbox').val("");
+      $('.textfield').hide();
+    };
 
 		if(self.shapeFactory !== null) {
 			console.log(movebuttonclicked);
