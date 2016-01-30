@@ -19,7 +19,7 @@ var Textbox = Shape.extend({
     canvas.fillStyle = this.color;
     canvas.fillText(this.text, this.pos.x, this.pos.y);
     this.width = this.pos.x + canvas.measureText(this.text).width;
-    this.height = this.pos.y - canvas.measureText(this.text).width;
+    this.height = this.pos.y - canvas.measureText('N').width;
     canvas.closePath();
   },
 
@@ -41,7 +41,7 @@ var Textbox = Shape.extend({
     canvas.lineWidth = 0.25;
     canvas.beginPath();
     canvas.setLineDash([6]);
-    canvas.strokeRect(this.size.x - this.pos.x, this.size.y - this.pos.y, this.width, this.height ); //(this.pos.x, this.pos.y, this.width - this.pos.x, this.height - this.pos.y );
+    canvas.strokeRect(this.pos.x, this.pos.y, this.width - this.pos.x, this.height - this.pos.y ); //canvas.strokeRect(this.size.x - this.pos.x, this.size.y - this.pos.y, this.width, this.height );
     this.base(canvas);
     canvas.closePath();
   },
