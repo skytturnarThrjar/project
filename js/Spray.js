@@ -5,6 +5,7 @@ var Spray = Shape.extend({
 	},
 
 	draw: function(canvas) {
+		canvas.beginPath();
 		canvas.lineJoin = canlineCap = 'round';
 		canvas.lineWidth = this.width;
 		canvas.fillStyle = this.color;
@@ -14,6 +15,8 @@ var Spray = Shape.extend({
 		}
 		canvas.stroke();
 		this.base(canvas);
+		canvas.closePath();
+
 	},
 
 	drawing:function(point) {
