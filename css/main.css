@@ -1,9 +1,6 @@
-body
-{
-	/*margin: 10px;*/
+body {
 	color:#4a4c49;
 	font-family: 'Avenir';
-
 }
 
 label {
@@ -38,6 +35,7 @@ label {
     height:90px;
     overflow-x:scroll;
 }
+
 .drawingListTitle {
 	background-color: white;
 	opacity: 0.8;
@@ -63,6 +61,7 @@ li:hover {
 .shapes {
 	justify-content: center;
 }
+
 .textfield {
     position: absolute;
     height: 50px;
@@ -71,32 +70,33 @@ li:hover {
     z-index: 99;
 }
 
-#textbox{
+#textbox {
 	font-size: 20pt;
 	height: 50px;
-  width: 300px;
+    width: 300px;
 }
 
 #SaveDrawingTitle {
 	margin-bottom: 10px;
 }
+
 #savebutton {
 	margin-bottom: -12px;
 }
 
-.icon 
-{  
+.icon {  
  	width: 40px;
     height: 40px;
     background-color: #494d4a;
 }
 
-.icon:hover{
+.icon:hover { 
 	width: 40px;
     height: 40px;
     background-color: #1dafd8;
 }
-.iconActive{
+
+.iconActive {
 	width: 40px;
     height: 40px;
     background-color: #1dafd8;

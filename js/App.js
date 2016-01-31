@@ -1,4 +1,5 @@
 var movebuttonclicked = false;
+var erasebuttonclicked = false;
 
 function RemoveAndAddClasses(buttonAddClass) {
 	$("#penbutton").removeClass("iconActive");
@@ -12,7 +13,7 @@ function RemoveAndAddClasses(buttonAddClass) {
 	$('#redobutton').removeClass("iconActive");
 	$('#savebutton').removeClass("iconActive");
 	$('#movebutton').removeClass("iconActive");
-
+	$('#erasebutton').removeClass("iconActive");
 
 	$(buttonAddClass).addClass("iconActive");
 }
@@ -29,7 +30,7 @@ function update(jscolor) {
 
 function App(canvasSelector) {
 	canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight;
 	var self = this;
 
 	self.getEventPoint = function(e) {
@@ -37,7 +38,6 @@ function App(canvasSelector) {
 	};
 
 	self.drawingStart = function(e) {
-		console.log("start");
 		var startPos = self.getEventPoint(e);
 		var shape = self.shapeFactory();
 		shape.pos = startPos;
@@ -45,10 +45,8 @@ function App(canvasSelector) {
 		shape.width = self.width;
 		shape.fontStyle = self.fontStyle;
 		shape.fontSize = self.fontSize;
-		console.log(shape.fontSize);
 		shape.font = self.font;
 
-    //shape.fontsize = self.fontsize;
 		shape.startDrawing(startPos,self.canvasContext);
 
 		var drawing = function(e) {
@@ -102,7 +100,7 @@ function App(canvasSelector) {
 
 	self.mousedown = function(e) {
 		var allinputs = document.getElementsByTagName('input');
-		//Array of all the buttons except the select button
+		//Array of all the buttons except the move button
 		var buttons = new Array();
 		for(var i = 0; i < allinputs.length; i++) {
 			if(allinputs[i].type === 'image' && allinputs[i].id !== 'movebutton') {
@@ -110,34 +108,43 @@ function App(canvasSelector) {
 			}
 		}
 		document.getElementById('movebutton').onclick = function() {
-      document.getElementById('canvas').style.cursor = "move";
+      		document.getElementById('canvas').style.cursor = "move";
 			movebuttonclicked = true;
+		};
+
+		document.getElementById('erasebutton').onclick = function() {
+      		document.getElementById('canvas').style.cursor = "erase";
+			erasebuttonclicked = true;
 		};
 
 		for(var j = 0; j < buttons.length; j++) {
 			$(buttons[j]).click(function () {
-        document.getElementById('canvas').style.cursor = "default";
+       			document.getElementById('canvas').style.cursor = "default";
 				movebuttonclicked = false;
+				erasebuttonclicked = false;
 			});
 		}
 
-    document.getElementById('toolbar').onclick = function() {
-      $('#textbox').val("");
-      $('.textfield').hide();
-    };
-    document.getElementById('font').onclick = function() {
-      $('#textbox').val("");
-      $('.textfield').hide();
-    };
-    document.getElementById('fontSize').onclick = function() {
-      $('#textbox').val("");
-      $('.textfield').hide();
-    };
+	    document.getElementById('toolbar').onclick = function() {
+			$('#textbox').val("");
+			$('.textfield').hide();
+	    };
+	    document.getElementById('font').onclick = function() {
+	        $('#textbox').val("");
+	        $('.textfield').hide();
+	    };
+	    document.getElementById('fontSize').onclick = function() {
+	        $('#textbox').val("");
+	        $('.textfield').hide();
+	    };
 
 		if(self.shapeFactory !== null) {
-			console.log(movebuttonclicked);
 			if(movebuttonclicked === true) {
 				self.move(e);
+			}
+			else if(erasebuttonclicked === true)
+			{
+				self.eraser(e);
 			}
 			else {
 				self.drawingStart(e);
@@ -182,6 +189,29 @@ function App(canvasSelector) {
 		});
 	};
 
+	self.eraser = function(e) {
+		var hnitt = self.getEventPoint(e);
+			for(var i = self.shapes.length - 1; i >= 0; i--){
+				self.shapes[i].selectedObj(hnitt.x, hnitt.y, self.canvasContext);
+				if(self.shapes[i].selectedObject){
+					var sh = i ;
+					break;
+				};
+			};
+
+		self.erasedShapes.push(self.shapes[sh]);
+		tempShapes = new Array();
+		for(var i = 0; i <= self.shapes.length-1; i++){
+			if ( i !== sh)
+			{
+				tempShapes.push(self.shapes[i]);
+			};
+		};
+		app.shapes = [];
+		self.shapes = tempShapes;
+		self.redraw ();
+	};
+
 	self.redraw = function() {
 		self.canvasContext.clearRect(0, 0, self.canvasContext.canvas.width, self.canvasContext.canvas.height);
 		for(var i = 0; i < self.shapes.length; i++) {
@@ -211,12 +241,10 @@ function App(canvasSelector) {
 				crossDomain: true,
 				success: function (data) {
 					// The save was successful...
-					console.log("worked");
 					self.loadDrawingList();
 				},
 				error: function (xhr, err) {
 					// Something went wrong...
-					console.log("nat");
 
 				}
 			});
@@ -245,11 +273,9 @@ function App(canvasSelector) {
 					}
 					str += '</li>';
 					$("#drawingList").append(str);
-					//console.log(data);
 				},
 				error: function (xhr, err) {
 					// Something went wrong...
-					console.log("Something went wrong");
 				}
 			});
 	};
@@ -286,33 +312,48 @@ function App(canvasSelector) {
             			shape.font = WhiteboardContents[i].font;
             			shape.fontStyle = WhiteboardContents[i].fontStyle;
 
-
 						self.shapes.push(shape);
 					}
 					self.redraw();
 				},
 				error: function (xhr, err) {
 					// Something went wrong...
-					console.log("nat");
-
 				}
 			});
 	};
 
 	self.undo = function() {
-		var undoShape = self.shapes.pop();
-		self.undoShapes.push(undoShape);
+		var undoShape
+		if( self.erasedShapes.length > 0)
+		{
+			undoShape = self.erasedShapes.pop();
+			self.shapes.push(undoShape);
+			self.undoerasedShapes.push(undoShape);
+
+		}
+		else
+		{
+			undoShape = self.shapes.pop();
+			self.undoShapes.push(undoShape);
+		}
 		self.redraw();
+		
 	};
 
 	self.redo = function() {
-		if ( self.undoShapes.length > 0) {
-			//console.log("inní " + self.undoShapes);
-			var redoShape = self.undoShapes.pop();
-			self.shapes.push(redoShape);
-			self.redraw();
+		var redoShape;
+		if( self.undoerasedShapes.length > 0)
+		{
+			redoShape = self.undoerasedShapes.pop();
+			redoShape = self.shapes.pop();
+			self.erasedShapes.push(redoShape);
+
 		}
-		//console.log(self.undoShapes);
+		else if ( self.undoShapes.length > 0) {
+			redoShape = self.undoShapes.pop();
+			self.shapes.push(redoShape);
+		}
+		self.redraw();
 	};
 
 	self.setColor = function(color) {
@@ -329,11 +370,7 @@ function App(canvasSelector) {
 	};
 
 	self.setFontsize = function(fontsize) {
-					console.log("textbutton click");
-			console.log(fontsize);
-
 	    self.fontSize = fontsize ;
-	    console.log(self.fontSize);
 	    self.redraw();
 	};
 	self.setFont = function(font) {
@@ -357,6 +394,8 @@ function App(canvasSelector) {
 		self.canvasContext = canvas.getContext("2d");
 		self.shapes = new Array();
 		self.undoShapes = new Array();
+		self.erasedShapes = new Array();
+		self.undoerasedShapes = new Array();
 
 		// Set defaults
 		self.color = '#69BFD9';
@@ -405,7 +444,7 @@ $(function() {
 				app.setFontsize($('#fontSize').val());
 				app.setFont($('#font').val());
 				app.setFontStyle($('#fontStyle').val());
-	  			return new Textbox(); //$('#font').val(), $('#fontSize').val(), $('#fontStyle').val()
+	  			return new Textbox(); 
 			};
 	});
 	$('#spraybutton').click(function() {
@@ -445,6 +484,10 @@ $(function() {
 
 	$('#movebutton').click(function(){
  		RemoveAndAddClasses('#movebutton');
+ 	});
+	$('#erasebutton').click(function(){
+		RemoveAndAddClasses('#erasebutton');
+
  	});
 
 	$('#color').change(function(){app.setColor($(this).val());});
