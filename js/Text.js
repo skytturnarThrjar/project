@@ -1,11 +1,7 @@
 var Textbox = Shape.extend({
 
-  //þetta þyrfti að sleppa þvi að taka inn dótið held ég
-  constructor: function(font, fontSize, fontstyle) {
+  constructor: function() { 
     this.base("Textbox");
-    this.font = font;
-    this.fontsize = fontSize;
-    this.fontstyle = fontstyle;
     this.text = '';
   },
 
@@ -16,8 +12,9 @@ var Textbox = Shape.extend({
   draw: function(canvas) {
     canvas.beginPath();
     canvas.setLineDash([0]);
-    canvas.font = (this.fontstyle + " " + this.fontsize + "pt " + this.font);
     canvas.fillStyle = this.color;
+    var font = this.fontStyle + " " + this.fontSize + "pt " + this.font;
+    canvas.font  = font ;
     canvas.fillText(this.text, this.pos.x, this.pos.y);
     this.width = this.pos.x + canvas.measureText(this.text).width;
     this.height = this.pos.y - canvas.measureText('N').width;

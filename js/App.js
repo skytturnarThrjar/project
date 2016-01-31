@@ -26,6 +26,11 @@ function App(canvasSelector) {
 		shape.pos = startPos;
 		shape.color = self.color;
 		shape.width = self.width;
+		shape.fontStyle = self.fontStyle;
+		shape.fontSize = self.fontSize;
+		console.log(shape.fontSize);
+		shape.font = self.font;
+
     //shape.fontsize = self.fontsize;
 		shape.startDrawing(startPos,self.canvasContext);
 
@@ -260,7 +265,10 @@ function App(canvasSelector) {
 						shape.radius = WhiteboardContents[i].radius;
 						shape.width = WhiteboardContents[i].width;
 						shape.text = WhiteboardContents[i].text;
-            //shape.fontsize = WhiteboardContents[i].fontsize;
+            			shape.fontSize = WhiteboardContents[i].fontSize;
+            			shape.font = WhiteboardContents[i].font;
+            			shape.fontStyle = WhiteboardContents[i].fontStyle;
+
 
 						self.shapes.push(shape);
 					}
@@ -302,12 +310,25 @@ function App(canvasSelector) {
 		self.shapes[self.shapes.length - 1].text = text;
 		self.redraw();
 	};
-/*
-  self.setFontsize = function(fontsize) {
-    self.fontsize = fontsize;
-    self.redraw();
-  };
-*/
+
+	self.setFontsize = function(fontsize) {
+					console.log("textbutton click");
+			console.log(fontsize);
+
+	    self.fontSize = fontsize ;
+	    console.log(self.fontSize);
+	    self.redraw();
+	};
+	self.setFont = function(font) {
+	    self.font = font ;
+	    self.redraw();
+	};
+
+	self.setFontStyle = function(fontStyle) {
+	    self.fontStyle = fontStyle ;
+	    self.redraw();
+	};
+
 	self.init = function() {
 		// Initialize App
 		self.canvas = $(canvasSelector);
@@ -323,7 +344,9 @@ function App(canvasSelector) {
 		// Set defaults
 		self.color = '#69BFD9';
 		self.width = 2;
-    //self.fontsize = "12";
+    	self.fontsize = "12";
+    	self.font = "Arial"
+    	self.fontStyle = "Normal"
 	};
 
 	self.init();
@@ -357,7 +380,10 @@ $(function() {
 	});
 	$('#textbutton').click(function() {
 			app.shapeFactory = function() {
-	  		return new Textbox($('#font').val(), $('#fontSize').val(), $('#fontStyle').val());
+				app.setFontsize($('#fontSize').val());
+				app.setFont($('#font').val());
+				app.setFontStyle($('#fontStyle').val());
+	  		return new Textbox(); //$('#font').val(), $('#fontSize').val(), $('#fontStyle').val()
 			};
 	});
 	$('#spraybutton').click(function() {
