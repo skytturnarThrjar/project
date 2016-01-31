@@ -11,8 +11,7 @@ label {
 	padding-left: 110px;
 	padding-top: 10px;
 }
-/* canvas { background:url(../test.jpg); }
-*/
+
 @font-face {
     font-family: "Avenir";
     src: url(AvenirLTStd-Book.otf) format("truetype");
@@ -22,9 +21,6 @@ label {
     width: 100px;
 }
 
-/*#toolbar {
-	background-color:#dedede;
-}*/
 #canvas {
 	display:block;
 }
@@ -64,15 +60,6 @@ li:hover {
 	text-decoration: none;
 }
 
-#squarebutton:hover {
-
-}
-/*
-label {
-    text-align:center;
-	vertical-align:middle;
-}*/
-
 .shapes {
 	justify-content: center;
 }
@@ -96,7 +83,6 @@ label {
 #savebutton {
 	margin-bottom: -12px;
 }
-
 
 .icon 
 {  
