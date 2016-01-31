@@ -27,7 +27,7 @@ var Circle = Shape.extend({
 		var yPos = this.pos.y - this.radius;
 		var ySize = this.pos.y + this.radius;
 
-		if((xPos < m && xSize > m) && (yPos < n && ySize > n)) {
+		if((xPos <= m && xSize >= m) && (yPos <= n && ySize >= n)) {
 			this.selectedObject = true;
 		}
 	},

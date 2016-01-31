@@ -58,8 +58,8 @@ selectedObj: function(m, n) {
 			}
 		}
 
-		if(xMin < m && xMax > m) {
-			if(yMin < n && yMax > n) {
+		if(xMin <= m && xMax >= m) {
+			if(yMin <= n && yMax >= n) {
 				this.selectedObject = true;
 			}
 		}

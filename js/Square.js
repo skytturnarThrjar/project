@@ -31,7 +31,7 @@ var Square = Shape.extend({
 	},
 
 	selectedObj: function(m, n) {
-		if((m > this.pos.x && m < (this.size.x + this.pos.x)) && (n > this.pos.y && n < (this.size.y + this.pos.y))) {
+		if((m >= this.pos.x && m <= (this.size.x + this.pos.x)) && (n >= this.pos.y && n <= (this.size.y + this.pos.y))) {
 			this.selectedObject = true;
   	}
 	},

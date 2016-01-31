@@ -50,7 +50,7 @@ var Pen = Shape.extend({
 				yMax = this.drawlineY[i];
 			}
 		}
-		if((xMin < m && xMax > m) && (yMin < n && yMax > n)) {
+		if((xMin <= m && xMax >= m) && (yMin <= n && yMax >= n)) {
 			this.selectedObject = true;
 		}
 	},
