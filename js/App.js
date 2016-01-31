@@ -1,5 +1,20 @@
 var movebuttonclicked = false;
 
+function RemoveAndAddClasses(buttonAddClass) {
+	$("#penbutton").removeClass("iconActive");
+	$('#textbutton').removeClass("iconActive");
+	$('#squarebutton').removeClass("iconActive");
+	$('#circlebutton').removeClass("iconActive");
+	$('#linebutton').removeClass("iconActive");
+	$('#spraybutton').removeClass("iconActive");
+	$('#clearbutton').removeClass("iconActive");
+	$('#undobutton').removeClass("iconActive");
+	$('#redobutton').removeClass("iconActive");
+	$('#savebutton').removeClass("iconActive");
+
+	$(buttonAddClass).addClass("iconActive");
+}
+
 function ShowWhiteboardDrawing(id) {
  	app.clear();
 	app.ShowDrawing(id);
@@ -359,34 +374,40 @@ $(function() {
 	app.loadDrawingList();
 
 	$('#squarebutton').click(function() {
-    app.shapeFactory = function() {
+		RemoveAndAddClasses('#squarebutton');
+    	app.shapeFactory = function() {
 			return new Square();
 		};
 	});
 	$('#circlebutton').click(function() {
+		RemoveAndAddClasses('#circlebutton');
 		app.shapeFactory = function() {
 			return new Circle();
 		};
 	});
 	$('#linebutton').click(function() {
+		RemoveAndAddClasses('#linebutton');
 		app.shapeFactory = function() {
 			return new Line();
 		};
 	});
 	$('#penbutton').click(function() {
+		RemoveAndAddClasses('#penbutton');
 		app.shapeFactory = function() {
 			return new Pen();
 		};
 	});
 	$('#textbutton').click(function() {
+		RemoveAndAddClasses('#textbutton');
 			app.shapeFactory = function() {
 				app.setFontsize($('#fontSize').val());
 				app.setFont($('#font').val());
 				app.setFontStyle($('#fontStyle').val());
-	  		return new Textbox(); //$('#font').val(), $('#fontSize').val(), $('#fontStyle').val()
+	  			return new Textbox(); //$('#font').val(), $('#fontSize').val(), $('#fontStyle').val()
 			};
 	});
 	$('#spraybutton').click(function() {
+		RemoveAndAddClasses('#spraybutton');
 		app.shapeFactory = function() {
 			return new Spray();
 		};
@@ -400,19 +421,31 @@ $(function() {
 			}
 		}
 	});
-	$('#clearbutton').click(function(){app.clear();});
-	$('#undobutton').click(function(){app.undo();});
-	$('#redobutton').click(function(){app.redo();});
-	$('#savebutton').click(function(){app.save(document.getElementById('SaveDrawingTitle').value);
+	$('#clearbutton').click(function(){
+		RemoveAndAddClasses('#clearbutton');
+		app.clear();
+	});
 
-});
-	//console.log(document.getElementById('SaveDrawingTitle').outerText);
-	$('#loadDrawingListbutton').click(function(){app.loadDrawingList();});
+	$('#undobutton').click(function(){
+		RemoveAndAddClasses('#undobutton');
+		app.undo();
+	});
+
+	$('#redobutton').click(function(){
+		RemoveAndAddClasses('#redobutton');
+		app.redo();
+	});
+
+	$('#savebutton').click(function(){
+		RemoveAndAddClasses('#savebutton');
+		app.save(document.getElementById('SaveDrawingTitle').value);
+	});
+
 	$('#color').change(function(){app.setColor($(this).val());});
 	$('#width').change(function(){app.setWidth($(this).val());});
   //$('#fontSize').change(function(){app.setFontsize($(this).val());});
 	$("control_id").attr("checked",true);
 
-  var checked = document.getElementById("penbutton");
-  checked.click();
-});
+	  var checked = document.getElementById("penbutton");
+	  checked.click();
+  });
