@@ -11,6 +11,8 @@ function RemoveAndAddClasses(buttonAddClass) {
 	$('#undobutton').removeClass("iconActive");
 	$('#redobutton').removeClass("iconActive");
 	$('#savebutton').removeClass("iconActive");
+	$('#movebutton').removeClass("iconActive");
+
 
 	$(buttonAddClass).addClass("iconActive");
 }
@@ -441,9 +443,12 @@ $(function() {
 		app.save(document.getElementById('SaveDrawingTitle').value);
 	});
 
+	$('#movebutton').click(function(){
+ 		RemoveAndAddClasses('#movebutton');
+ 	});
+
 	$('#color').change(function(){app.setColor($(this).val());});
 	$('#width').change(function(){app.setWidth($(this).val());});
-  //$('#fontSize').change(function(){app.setFontsize($(this).val());});
 	$("control_id").attr("checked",true);
 
 	  var checked = document.getElementById("penbutton");
