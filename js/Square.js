@@ -44,7 +44,6 @@ var Square = Shape.extend({
 	},
 
 	selectedFill: function(canvas) {
-
 		canvas.strokeStyle = "#000000";
 		canvas.lineWidth = 0.5;
 		canvas.beginPath();

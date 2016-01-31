@@ -64,6 +64,7 @@ selectedObj: function(m, n) {
 			}
 		}
 	},
+
 	moveObj: function(startp, point) {
 
 		this.pos.x = point.x + (this.pos.x - startp.x);
@@ -82,23 +83,23 @@ selectedObj: function(m, n) {
 		var yMin = 1000;
 
 		for(var i = 0; i < this.drawlineX.length; i++) {
-			if(this.drawlineX[i] < xMin){
+			if(this.drawlineX[i] < xMin) {
 				xMin = this.drawlineX[i];
 			}
 
-			if(this.drawlineX[i] > xMax){
+			if(this.drawlineX[i] > xMax) {
 				xMax = this.drawlineX[i];
 			}
 
-			if(this.drawlineY[i] < yMin){
+			if(this.drawlineY[i] < yMin) {
 				yMin = this.drawlineY[i];
 			}
 
-			if(this.drawlineY[i] > yMax){
+			if(this.drawlineY[i] > yMax) {
 				yMax = this.drawlineY[i];
 			}
 		}
-		
+
 		canvas.strokeStyle = "#000000";
 		canvas.lineWidth = 0.5;
 		canvas.beginPath();

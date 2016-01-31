@@ -67,6 +67,8 @@ function App(canvasSelector) {
 
 			// Empty the redo array
 			self.undoShapes = [];
+			self.undoerasedShapes = [];
+			self.erasedShapes = [];
 
 			// Remove drawing and drawingStop functions from the mouse events
 			self.canvas.off({
@@ -125,18 +127,18 @@ function App(canvasSelector) {
 			});
 		}
 
-	    document.getElementById('toolbar').onclick = function() {
+    document.getElementById('toolbar').onclick = function() {
 			$('#textbox').val("");
 			$('.textfield').hide();
-	    };
-	    document.getElementById('font').onclick = function() {
-	        $('#textbox').val("");
-	        $('.textfield').hide();
-	    };
-	    document.getElementById('fontSize').onclick = function() {
-	        $('#textbox').val("");
-	        $('.textfield').hide();
-	    };
+    };
+    document.getElementById('font').onclick = function() {
+      $('#textbox').val("");
+      $('.textfield').hide();
+    };
+    document.getElementById('fontSize').onclick = function() {
+      $('#textbox').val("");
+      $('.textfield').hide();
+    };
 
 		if(self.shapeFactory !== null) {
 			if(movebuttonclicked === true) {
@@ -156,9 +158,9 @@ function App(canvasSelector) {
 
 	self.move = function(e) {
 		var hnit = self.getEventPoint(e);
-		for(var i = self.shapes.length - 1; i >= 0; i--){
+		for(var i = self.shapes.length - 1; i >= 0; i--) {
 			self.shapes[i].selectedObj(hnit.x, hnit.y, self.canvasContext);
-			if(self.shapes[i].selectedObject){
+			if(self.shapes[i].selectedObject) {
 				var sh = self.shapes[i];
 				var moveObj = function(e) {
 					var pos = self.getEventPoint(e);
@@ -191,19 +193,18 @@ function App(canvasSelector) {
 
 	self.eraser = function(e) {
 		var hnitt = self.getEventPoint(e);
-			for(var i = self.shapes.length - 1; i >= 0; i--){
+			for(var i = self.shapes.length - 1; i >= 0; i--) {
 				self.shapes[i].selectedObj(hnitt.x, hnitt.y, self.canvasContext);
 				if(self.shapes[i].selectedObject){
-					var sh = i ;
+					var sh = i;
 					break;
 				};
 			};
 
 		self.erasedShapes.push(self.shapes[sh]);
 		tempShapes = new Array();
-		for(var i = 0; i <= self.shapes.length-1; i++){
-			if ( i !== sh)
-			{
+		for(var i = 0; i <= self.shapes.length-1; i++) {
+			if (i !== sh) {
 				tempShapes.push(self.shapes[i]);
 			};
 		};
@@ -308,9 +309,9 @@ function App(canvasSelector) {
 						shape.radius = WhiteboardContents[i].radius;
 						shape.width = WhiteboardContents[i].width;
 						shape.text = WhiteboardContents[i].text;
-            			shape.fontSize = WhiteboardContents[i].fontSize;
-            			shape.font = WhiteboardContents[i].font;
-            			shape.fontStyle = WhiteboardContents[i].fontStyle;
+      			shape.fontSize = WhiteboardContents[i].fontSize;
+      			shape.font = WhiteboardContents[i].font;
+      			shape.fontStyle = WhiteboardContents[i].fontStyle;
 
 						self.shapes.push(shape);
 					}
@@ -324,32 +325,28 @@ function App(canvasSelector) {
 
 	self.undo = function() {
 		var undoShape
-		if( self.erasedShapes.length > 0)
-		{
+		if( self.erasedShapes.length > 0) {
 			undoShape = self.erasedShapes.pop();
 			self.shapes.push(undoShape);
 			self.undoerasedShapes.push(undoShape);
 
 		}
-		else
-		{
+		else {
 			undoShape = self.shapes.pop();
 			self.undoShapes.push(undoShape);
 		}
 		self.redraw();
-		
+
 	};
 
 	self.redo = function() {
 		var redoShape;
-		if( self.undoerasedShapes.length > 0)
-		{
+		if(self.undoerasedShapes.length > 0) {
 			redoShape = self.undoerasedShapes.pop();
 			redoShape = self.shapes.pop();
 			self.erasedShapes.push(redoShape);
-
 		}
-		else if ( self.undoShapes.length > 0) {
+		else if(self.undoShapes.length > 0) {
 			redoShape = self.undoShapes.pop();
 			self.shapes.push(redoShape);
 		}
@@ -364,23 +361,23 @@ function App(canvasSelector) {
 		self.width = width;
 	};
 
-	self.setText = function(text){
+	self.setText = function(text) {
 		self.shapes[self.shapes.length - 1].text = text;
 		self.redraw();
 	};
 
 	self.setFontsize = function(fontsize) {
-	    self.fontSize = fontsize ;
-	    self.redraw();
+    self.fontSize = fontsize ;
+    self.redraw();
 	};
 	self.setFont = function(font) {
-	    self.font = font ;
-	    self.redraw();
+    self.font = font ;
+    self.redraw();
 	};
 
 	self.setFontStyle = function(fontStyle) {
-	    self.fontStyle = fontStyle ;
-	    self.redraw();
+    self.fontStyle = fontStyle ;
+    self.redraw();
 	};
 
 	self.init = function() {
@@ -400,9 +397,9 @@ function App(canvasSelector) {
 		// Set defaults
 		self.color = '#69BFD9';
 		self.width = 2;
-    	self.fontsize = "12";
-    	self.font = "Arial"
-    	self.fontStyle = "Normal"
+  	self.fontsize = "12";
+  	self.font = "Arial"
+  	self.fontStyle = "Normal"
 	};
 
 	self.init();
@@ -416,7 +413,7 @@ $(function() {
 
 	$('#squarebutton').click(function() {
 		RemoveAndAddClasses('#squarebutton');
-    	app.shapeFactory = function() {
+  	app.shapeFactory = function() {
 			return new Square();
 		};
 	});
@@ -440,11 +437,11 @@ $(function() {
 	});
 	$('#textbutton').click(function() {
 		RemoveAndAddClasses('#textbutton');
-			app.shapeFactory = function() {
-				app.setFontsize($('#fontSize').val());
-				app.setFont($('#font').val());
-				app.setFontStyle($('#fontStyle').val());
-	  			return new Textbox(); 
+		app.shapeFactory = function() {
+			app.setFontsize($('#fontSize').val());
+			app.setFont($('#font').val());
+			app.setFontStyle($('#fontStyle').val());
+			return new Textbox();
 			};
 	});
 	$('#spraybutton').click(function() {
@@ -485,15 +482,15 @@ $(function() {
 	$('#movebutton').click(function(){
  		RemoveAndAddClasses('#movebutton');
  	});
+
 	$('#erasebutton').click(function(){
 		RemoveAndAddClasses('#erasebutton');
-
  	});
 
 	$('#color').change(function(){app.setColor($(this).val());});
 	$('#width').change(function(){app.setWidth($(this).val());});
 	$("control_id").attr("checked",true);
 
-	  var checked = document.getElementById("penbutton");
-	  checked.click();
-  });
+  var checked = document.getElementById("penbutton");
+  checked.click();
+});

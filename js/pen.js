@@ -71,19 +71,19 @@ var Pen = Shape.extend({
 		var yMin = 1000;
 
 		for(var i = 0; i < this.drawlineX.length; i++) {
-			if(this.drawlineX[i] < xMin){
+			if(this.drawlineX[i] < xMin) {
 				xMin = this.drawlineX[i];
 			}
 
-			if(this.drawlineX[i] > xMax){
+			if(this.drawlineX[i] > xMax) {
 				xMax = this.drawlineX[i];
 			}
 
-			if(this.drawlineY[i] < yMin){
+			if(this.drawlineY[i] < yMin) {
 				yMin = this.drawlineY[i];
 			}
 
-			if(this.drawlineY[i] > yMax){
+			if(this.drawlineY[i] > yMax) {
 				yMax = this.drawlineY[i];
 			}
 		}

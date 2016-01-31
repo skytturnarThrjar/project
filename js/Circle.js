@@ -20,16 +20,18 @@ var Circle = Shape.extend({
 		this.size.y = point.y;
 		this.radius = Math.sqrt(Math.pow(this.size.x - this.pos.x, 2) + Math.pow(this.size.y - this.pos.y, 2));
 	},
+
 	selectedObj: function(m, n) {
 		var xPos = this.pos.x - this.radius;
 		var xSize = this.pos.x + this.radius;
 		var yPos = this.pos.y - this.radius;
 		var ySize = this.pos.y + this.radius;
 
-		if((xPos < m && xSize > m) && (yPos < n && ySize > n)){
+		if((xPos < m && xSize > m) && (yPos < n && ySize > n)) {
 			this.selectedObject = true;
 		}
 	},
+
 	moveObj: function(start, end) {
 		var distX = start.x - end.x;
 		var distY = start.y - end.y;

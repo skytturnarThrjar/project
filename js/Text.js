@@ -1,6 +1,6 @@
 var Textbox = Shape.extend({
 
-  constructor: function() { 
+  constructor: function() {
     this.base("Textbox");
     this.text = '';
   },
@@ -23,7 +23,7 @@ var Textbox = Shape.extend({
 
   selectedObj: function(m, n, canvas) {
     if((m >= this.pos.x && m <= this.width) && (n <= this.pos.y && n >= this.height)) {
-        this.selectedObject = true;
+      this.selectedObject = true;
     }
   },
 
