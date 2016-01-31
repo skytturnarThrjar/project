@@ -33,29 +33,29 @@ var Line = Shape.extend({
 
 	selectedObj: function(m, n) {
 
-		if(this.startX < this.size.x) {
-			if(this.startX < m && this.size.x > m) {
-				if(this.startY < this.size.y) {
-					if(this.startY < n && this.size.y > n) {
+		if(this.startX <= this.size.x) {
+			if(this.startX - 1 <= m && this.size.x + 1 >= m) {
+				if(this.startY <= this.size.y) {
+					if(this.startY - 1 <= n && this.size.y + 1 >= n) {
 						this.selectedObject = true;
 					}
 				}
 				else {
-					if(this.size.y < n && this.pos.y > n) {
+					if(this.size.y - 1 <= n && this.pos.y + 1 >= n) {
 						this.selectedObject = true;
 					}
 				}
 			}
 		}
 		else {
-			if(this.size.x < m && this.startX > m) {
-				if(this.startY < this.size.y) {
-					if(this.startY < n && this.size.y > n) {
+			if(this.size.x - 1 <= m && this.startX + 1 >= m) {
+				if(this.startY <= this.size.y) {
+					if(this.startY - 1 <= n && this.size.y + 1 >= n) {
 						this.selectedObject = true;
 					}
 				}
 				else{
-					if(this.size.y < n && this.startY > n){
+					if(this.size.y - 1 <= n && this.startY + 1 >= n){
 						this.selectedObject = true;
 					}
 				}
