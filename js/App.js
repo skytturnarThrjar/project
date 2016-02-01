@@ -227,7 +227,7 @@ function App(canvasSelector) {
 
 	self.save = function(name) {
 		var stringifiedArray = JSON.stringify(self.shapes);
-			var param = { "user": "laufey14", // You should use your own username!
+			var param = { "user": "vala14", // You should use your own username!
 				"name": name, //title,
 				"content": stringifiedArray,
 				"template": true
@@ -253,7 +253,7 @@ function App(canvasSelector) {
 
 	self.loadDrawingList = function() {
 		var stringifiedArray = JSON.stringify(self.shapes);
-			var param = { "user": "laufey14", // You should use your own username!
+			var param = { "user": "vala14", // You should use your own username!
 				"content": stringifiedArray,
 				"template": true
 			};
@@ -283,7 +283,7 @@ function App(canvasSelector) {
 
 	self.ShowDrawing = function ShowDrawing(id) {
 		var stringifiedArray = JSON.stringify(self.shapes);
-			var param = { "user": "laufey14", // You should use your own username!
+			var param = { "user": "vala14", // You should use your own username!
 				"id" : id // ekki harðkóða
 			};
 
