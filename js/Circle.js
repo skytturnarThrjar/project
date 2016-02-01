@@ -40,7 +40,6 @@ var Circle = Shape.extend({
 	},
 
 	selectedFill: function(canvas) {
-
 		var xPos = this.pos.x - this.radius;
 		var xSize = this.pos.x + this.radius;
 		var yPos = this.pos.y - this.radius;

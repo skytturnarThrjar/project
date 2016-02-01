@@ -32,7 +32,6 @@ var Line = Shape.extend({
 	},
 
 	selectedObj: function(m, n) {
-
 		if(this.startX <= this.size.x) {
 			if(this.startX - 1 <= m && this.size.x + 1 >= m) {
 				if(this.startY <= this.size.y) {
@@ -55,7 +54,7 @@ var Line = Shape.extend({
 					}
 				}
 				else{
-					if(this.size.y - 1 <= n && this.startY + 1 >= n){
+					if(this.size.y - 1 <= n && this.startY + 1 >= n) {
 						this.selectedObject = true;
 					}
 				}

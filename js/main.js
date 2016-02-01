@@ -1,4 +1,3 @@
-
 function RemoveAndAddClasses(buttonAddClass) {
 	$("#penbutton").removeClass("iconActive");
 	$('#textbutton').removeClass("iconActive");
@@ -25,45 +24,22 @@ function update(jscolor) {
     // 'jscolor' instance can be used as a string
     app.setColor(jscolor);
 }
-$('#info-icon').click(function(){
-  var introguide = introJs();
 
+$('#info-icon').click(function() {
+  var introguide = introJs();
   introguide.setOptions({
-    steps: [
+    steps:[
         {
           element: '.icon',
           intro: '',
           position: 'bottom'
         },
-         {
-          element: '#info-icon',
+        {
+        	element: '#info-icon',
           intro: '',
           position: 'bottom'
         },
-        
     ]
-});
-
+	});
   introguide.start();
-
 });
-
-
-// $('#info-icon').click(function(){
-// 	var introguide = introJs();
-
-//     introguide.setOptions({
-//     steps: [
-//         {
-//           element: '#info-icon',
-//           intro: '',
-//           position: 'bottom'
-//         },  
-//     ]
-//     })
-//       		introguide.start();
-
-
-// });
-
-

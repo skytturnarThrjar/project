@@ -3,10 +3,7 @@ var Pen = Shape.extend({
 	constructor: function() {
 		this.base("Pen");
 	},
-
-	startDrawing:function(point) {
-	},
-
+	
 	draw: function(canvas) {
 		canvas.strokeStyle = this.color;
 		canvas.lineWidth = this.width;

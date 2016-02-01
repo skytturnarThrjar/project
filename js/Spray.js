@@ -16,7 +16,6 @@ var Spray = Shape.extend({
 		canvas.stroke();
 		this.base(canvas);
 		canvas.closePath();
-
 	},
 
 	drawing:function(point) {
@@ -66,7 +65,6 @@ selectedObj: function(m, n) {
 	},
 
 	moveObj: function(startp, point) {
-
 		this.pos.x = point.x + (this.pos.x - startp.x);
 		this.pos.y = point.y + (this.pos.y - startp.y);
 

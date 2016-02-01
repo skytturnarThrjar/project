@@ -1,5 +1,5 @@
-var movebuttonclicked = false;
-var erasebuttonclicked = false;
+var movebuttonClicked = false;
+var erasebuttonClicked = false;
 
 function RemoveAndAddClasses(buttonAddClass) {
 	$("#penbutton").removeClass("iconActive");
@@ -24,13 +24,13 @@ function ShowWhiteboardDrawing(id) {
 }
 
 function update(jscolor) {
-    // 'jscolor' instance can be used as a string
-    app.setColor(jscolor);
+  // 'jscolor' instance can be used as a string
+  app.setColor(jscolor);
 }
 
 function App(canvasSelector) {
 	canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  canvas.height = window.innerHeight;
 	var self = this;
 
 	self.getEventPoint = function(e) {
@@ -51,9 +51,7 @@ function App(canvasSelector) {
 
 		var drawing = function(e) {
 			var pos = self.getEventPoint(e);
-
 			shape.drawing(pos,self.canvasContext);
-
 			self.redraw();
 			shape.draw(self.canvasContext);
 		};
@@ -62,20 +60,16 @@ function App(canvasSelector) {
 			var pos = self.getEventPoint(e);
 			shape.stopDrawing(pos,self.canvasContext);
 			self.shapes.push(shape);
-
 			shape.added(self.canvasContext);
-
 			// Empty the redo array
 			self.undoShapes = [];
 			self.undoerasedShapes = [];
 			self.erasedShapes = [];
-
 			// Remove drawing and drawingStop functions from the mouse events
 			self.canvas.off({
 				mousemove:drawing,
 				mouseup:drawingStop
 			});
-
 			self.redraw();
 		};
 
@@ -95,7 +89,7 @@ function App(canvasSelector) {
 
 		function CanvasResizeFunction() {
 			canvas.width = window.innerWidth;
-   			canvas.height = window.innerHeight;
+   		canvas.height = window.innerHeight;
 			self.redraw();
 		}
 	};
@@ -110,20 +104,20 @@ function App(canvasSelector) {
 			}
 		}
 		document.getElementById('movebutton').onclick = function() {
-      		document.getElementById('canvas').style.cursor = "move";
-			movebuttonclicked = true;
+      document.getElementById('canvas').style.cursor = "move";
+			movebuttonClicked = true;
 		};
 
 		document.getElementById('erasebutton').onclick = function() {
-      		document.getElementById('canvas').style.cursor = "erase";
-			erasebuttonclicked = true;
+      document.getElementById('canvas').style.cursor = "erase";
+			erasebuttonClicked = true;
 		};
 
 		for(var j = 0; j < buttons.length; j++) {
 			$(buttons[j]).click(function () {
-       			document.getElementById('canvas').style.cursor = "default";
-				movebuttonclicked = false;
-				erasebuttonclicked = false;
+       	document.getElementById('canvas').style.cursor = "default";
+				movebuttonClicked = false;
+				erasebuttonClicked = false;
 			});
 		}
 
@@ -141,11 +135,10 @@ function App(canvasSelector) {
     };
 
 		if(self.shapeFactory !== null) {
-			if(movebuttonclicked === true) {
+			if(movebuttonClicked === true) {
 				self.move(e);
 			}
-			else if(erasebuttonclicked === true)
-			{
+			else if(erasebuttonClicked === true) {
 				self.eraser(e);
 			}
 			else {
@@ -195,7 +188,7 @@ function App(canvasSelector) {
 		var hnitt = self.getEventPoint(e);
 			for(var i = self.shapes.length - 1; i >= 0; i--) {
 				self.shapes[i].selectedObj(hnitt.x, hnitt.y, self.canvasContext);
-				if(self.shapes[i].selectedObject){
+				if(self.shapes[i].selectedObject) {
 					var sh = i;
 					break;
 				};
@@ -227,116 +220,113 @@ function App(canvasSelector) {
 
 	self.save = function(name) {
 		var stringifiedArray = JSON.stringify(self.shapes);
-			var param = { "user": "vala14", // You should use your own username!
-				"name": name, //title,
-				"content": stringifiedArray,
-				"template": true
-			};
+		var param = { "user": "vala14", // You should use your own username!
+			"name": name, //title,
+			"content": stringifiedArray,
+			"template": true
+		};
 
-			$.ajax({
-				type: "POST",
-				contentType: "application/json; charset=utf-8",
-				url: "http://whiteboard.apphb.com/Home/Save",
-				data: param,
-				dataType: "jsonp",
-				crossDomain: true,
-				success: function (data) {
-					// The save was successful...
-					self.loadDrawingList();
-				},
-				error: function (xhr, err) {
-					// Something went wrong...
+		$.ajax({
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			url: "http://whiteboard.apphb.com/Home/Save",
+			data: param,
+			dataType: "jsonp",
+			crossDomain: true,
+			success: function (data) {
+				// The save was successful...
+				self.loadDrawingList();
+			},
+			error: function (xhr, err) {
+				// Something went wrong...
 
-				}
-			});
+			}
+		});
 	};
 
 	self.loadDrawingList = function() {
 		var stringifiedArray = JSON.stringify(self.shapes);
-			var param = { "user": "vala14", // You should use your own username!
-				"content": stringifiedArray,
-				"template": true
-			};
+		var param = { "user": "vala14", // You should use your own username!
+			"content": stringifiedArray,
+			"template": true
+		};
 
-			$.ajax({
-				type: "POST",
-				contentType: "application/json; charset=utf-8",
-				url: "http://whiteboard.apphb.com/Home/GetList",
-				data: param,
-				dataType: "jsonp",
-				crossDomain: true,
-				success: function (data) {
+		$.ajax({
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			url: "http://whiteboard.apphb.com/Home/GetList",
+			data: param,
+			dataType: "jsonp",
+			crossDomain: true,
+			success: function (data) {
 				var str = "<li '>";
-					$('#drawingList li').remove();
-					for( var i in data)
-					{
-   						str += '<li onclick="ShowWhiteboardDrawing('+  data[i].ID  +')" class="whiteboardTemplate">' + data[i].WhiteboardTitle+ '</li>';
-					}
-					str += '</li>';
-					$("#drawingList").append(str);
-				},
-				error: function (xhr, err) {
-					// Something went wrong...
+				$('#drawingList li').remove();
+				for( var i in data) {
+					str += '<li onclick="ShowWhiteboardDrawing('+  data[i].ID  +')" class="whiteboardTemplate">' + data[i].WhiteboardTitle+ '</li>';
 				}
-			});
+				str += '</li>';
+				$("#drawingList").append(str);
+			},
+			error: function (xhr, err) {
+				// Something went wrong...
+			}
+		});
 	};
 
 	self.ShowDrawing = function ShowDrawing(id) {
 		var stringifiedArray = JSON.stringify(self.shapes);
-			var param = { "user": "vala14", // You should use your own username!
+		var param = { "user": "vala14", // You should use your own username!
 				"id" : id // ekki harðkóða
-			};
+		};
 
-			$.ajax({
-				type: "POST",
-				contentType: "application/json; charset=utf-8",
-				url: "http://whiteboard.apphb.com/Home/GetWhiteboard",
-				data: param,
-				dataType: "jsonp",
-				crossDomain: true,
-				success: function (data) {
-					var WhiteboardContents = JSON.parse(data.WhiteboardContents);
-					for(var i = 0; i < WhiteboardContents.length; i++) {
-						var shape = eval('new ' + WhiteboardContents[i].name + '();');
+		$.ajax({
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			url: "http://whiteboard.apphb.com/Home/GetWhiteboard",
+			data: param,
+			dataType: "jsonp",
+			crossDomain: true,
+			success: function (data) {
+				var WhiteboardContents = JSON.parse(data.WhiteboardContents);
+				for(var i = 0; i < WhiteboardContents.length; i++) {
+					var shape = eval('new ' + WhiteboardContents[i].name + '();');
 
-						shape.pos = WhiteboardContents[i].pos;
-						shape.size = WhiteboardContents[i].size;
-						shape.color = WhiteboardContents[i].color;
-						shape.startX = WhiteboardContents[i].startX;
-						shape.startY = WhiteboardContents[i].startY;
-						shape.drawlineX = WhiteboardContents[i].drawlineX;
-						shape.drawlineY = WhiteboardContents[i].drawlineY;
-						shape.radius = WhiteboardContents[i].radius;
-						shape.width = WhiteboardContents[i].width;
-						shape.text = WhiteboardContents[i].text;
-      			shape.fontSize = WhiteboardContents[i].fontSize;
-      			shape.font = WhiteboardContents[i].font;
-      			shape.fontStyle = WhiteboardContents[i].fontStyle;
+					shape.pos = WhiteboardContents[i].pos;
+					shape.size = WhiteboardContents[i].size;
+					shape.color = WhiteboardContents[i].color;
+					shape.startX = WhiteboardContents[i].startX;
+					shape.startY = WhiteboardContents[i].startY;
+					shape.drawlineX = WhiteboardContents[i].drawlineX;
+					shape.drawlineY = WhiteboardContents[i].drawlineY;
+					shape.radius = WhiteboardContents[i].radius;
+					shape.width = WhiteboardContents[i].width;
+					shape.text = WhiteboardContents[i].text;
+    			shape.fontSize = WhiteboardContents[i].fontSize;
+    			shape.font = WhiteboardContents[i].font;
+    			shape.fontStyle = WhiteboardContents[i].fontStyle;
 
-						self.shapes.push(shape);
-					}
-					self.redraw();
-				},
-				error: function (xhr, err) {
-					// Something went wrong...
+					self.shapes.push(shape);
 				}
-			});
+				self.redraw();
+			},
+			error: function (xhr, err) {
+				// Something went wrong...
+			}
+		});
 	};
 
 	self.undo = function() {
 		var undoShape
-		if( self.erasedShapes.length > 0) {
+		if(self.erasedShapes.length > 0) {
 			undoShape = self.erasedShapes.pop();
 			self.shapes.push(undoShape);
 			self.undoerasedShapes.push(undoShape);
-
 		}
 		else {
 			undoShape = self.shapes.pop();
 			self.undoShapes.push(undoShape);
 		}
 		self.redraw();
-
 	};
 
 	self.redo = function() {
@@ -393,7 +383,6 @@ function App(canvasSelector) {
 		self.undoShapes = new Array();
 		self.erasedShapes = new Array();
 		self.undoerasedShapes = new Array();
-
 		// Set defaults
 		self.color = '#69BFD9';
 		self.width = 2;
@@ -401,7 +390,6 @@ function App(canvasSelector) {
   	self.font = "Arial"
   	self.fontStyle = "Normal"
 	};
-
 	self.init();
 }
 
@@ -491,28 +479,24 @@ $(function() {
 	$('#width').change(function(){app.setWidth($(this).val());});
 	$("control_id").attr("checked",true);
 
-    var checked = document.getElementById("penbutton");
-    checked.click();
-    	$('#info-icon').click(function(){
-  		var introguide = introJs();
-
-  		introguide.setOptions({
-	    steps: [
-	        {
-	          element: '.icon',
-	          intro: '',
-	          position: 'bottom'
-	        },
-	         {
-	          element: '#info-icon',
-	          intro: '',
-	          position: 'bottom'
-	        },
-	        
-	    ]
+  var checked = document.getElementById("penbutton");
+  checked.click();
+	$('#info-icon').click(function(){
+		var introguide = introJs();
+		introguide.setOptions({
+			steps:[
+			    {
+			      element: '.icon',
+			      intro: '',
+			      position: 'bottom'
+			    },
+			    {
+			    	element: '#info-icon',
+			      intro: '',
+			      position: 'bottom'
+			    },
+			]
 		});
-
-  		introguide.start();
-
-		});
+		introguide.start();
+	});
 });
