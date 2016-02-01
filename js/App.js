@@ -491,6 +491,28 @@ $(function() {
 	$('#width').change(function(){app.setWidth($(this).val());});
 	$("control_id").attr("checked",true);
 
-  var checked = document.getElementById("penbutton");
-  checked.click();
+    var checked = document.getElementById("penbutton");
+    checked.click();
+    	$('#info-icon').click(function(){
+  		var introguide = introJs();
+
+  		introguide.setOptions({
+	    steps: [
+	        {
+	          element: '.icon',
+	          intro: '',
+	          position: 'bottom'
+	        },
+	         {
+	          element: '#info-icon',
+	          intro: '',
+	          position: 'bottom'
+	        },
+	        
+	    ]
+		});
+
+  		introguide.start();
+
+		});
 });
