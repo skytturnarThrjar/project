@@ -3,7 +3,7 @@ var Pen = Shape.extend({
 	constructor: function() {
 		this.base("Pen");
 	},
-	
+
 	draw: function(canvas) {
 		canvas.strokeStyle = this.color;
 		canvas.lineWidth = this.width;
@@ -29,9 +29,9 @@ var Pen = Shape.extend({
 
 	selectedObj: function(m, n) {
 		var xMax = 0;
-		var xMin = 1000;//canvasMax
+		var xMin = window.innerWidth;
 		var yMax = 0;
-		var yMin = 1000;
+		var yMin = window.innerHeight;
 
 		for(var i = 0; i < this.drawlineX.length; i++) {
 			if(this.drawlineX[i] < xMin) {
@@ -63,9 +63,9 @@ var Pen = Shape.extend({
 
 	selectedFill: function(canvas) {
 		var xMax = 0;
-		var xMin = 1000;//canvasMax
+		var xMin = window.innerWidth;
 		var yMax = 0;
-		var yMin = 1000;
+		var yMin = window.innerHeight;
 
 		for(var i = 0; i < this.drawlineX.length; i++) {
 			if(this.drawlineX[i] < xMin) {

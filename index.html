@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -36,38 +37,30 @@
 	<div class="col-md-3 col-sm-4 col-xs-4">
 		<div id="toolbar" class="test">
 				<div class="shapes">
-					<input type="image" src="img/icons/info.gif" id="info-icon" data-intro='Learn the basics about draw' data-step='1' data-position="left">
-
-					<img src="img/LogoDraw.png" id="logo" >
-					<input data-intro='Pen tool' data-step='2' type="image" src="img/icons/pen.gif" id="penbutton" class="icon" ></input>
-
-					<input data-intro='Spray tool' data-step='3' type="image" src="img/icons/spray.gif" name="tool" id="spraybutton" class="icon"></input>
-
-					<input data-intro='Line tool' data-step='4' type="image" src="img/icons/line.gif" name="tool" id="linebutton" class="icon"></input>
-
-					<input data-intro='Click and drag to make a square' data-step='5' data-position="left" type="image" src="img/icons/Square.gif" name="tool" id="squarebutton" class="icon"></input>
-
-					<input data-intro='Click and drag to make a circle' data-step='6' data-position="left" type="image" src="img/icons/circle.gif" name="tool" id="circlebutton" class="icon"></input>
-
-					<input data-intro='Click on canvas to write a text' data-step='8' data-position="left" type="image" src="img/icons/text.gif" name="tool" id="textbutton" class="icon" ></input>
-
-					<input data-intro='Click on item to move' data-step='9' data-position="left" type="image" src="img/icons/move.gif" name="tool" id="movebutton" class="icon" ></input>
-					<input data-intro='Click on item to erase' data-step='10' data-position="left" type="image" src="img/icons/eraser.gif" name="tool" id="erasebutton" class="icon"  ></input>
+					<input type="image" src="img/icons/info.gif" alt="info" id="info-icon" data-intro='Learn the basics about draw' data-step='1' data-position="left">
+					<img src="img/LogoDraw.png" alt="logo" id="logo" >
+					<input data-intro='Pen tool' data-step='2' type="image" src="img/icons/pen.gif" alt="pen" id="penbutton" class="icon">
+					<input data-intro='Spray tool' data-step='3' type="image" src="img/icons/spray.gif" alt="spray" name="tool" id="spraybutton" class="icon">
+					<input data-intro='Line tool' data-step='4' type="image" src="img/icons/line.gif" alt="line" name="tool" id="linebutton" class="icon">
+					<input data-intro='Click and drag to make a square' data-step='5' data-position="left" type="image" src="img/icons/Square.gif" alt="square" name="tool" id="squarebutton" class="icon">
+					<input data-intro='Click and drag to make a circle' data-step='6' data-position="left" type="image" src="img/icons/circle.gif" alt="circle" name="tool" id="circlebutton" class="icon">
+					<input data-intro='Click on canvas to write a text' data-step='8' data-position="left" type="image" src="img/icons/text.gif" alt="text" name="tool" id="textbutton" class="icon" >
+					<input data-intro='Click on item to move' data-step='9' data-position="left" type="image" src="img/icons/move.gif" alt="move" name="tool" id="movebutton" class="icon" >
+					<input data-intro='Click on item to erase' data-step='10' data-position="left" type="image" src="img/icons/eraser.gif" alt="eraser" name="tool" id="erasebutton" class="icon">
 				</div>
 				<br/>
 
-				<input data-intro='Here you can choose color' data-step='11' data-position="left" class="jscolor form-control width-100 "  onchange="update(this.jscolor)" name="color" id="color" value="69BFD9"></input>
-
+				<input data-intro='Click to choose color' data-step='11' data-position="left" class="jscolor form-control width-100 "  onchange="update(this.jscolor)" name="color" id="color" value="69BFD9">
 				<div data-intro='Here you can change settings for the text' data-position="left" data-step='8'>
 					<label for="fontStyle">Font Style</label>
-					<select class="form-control width-100 bfh-selectbox fontStyle" id="fontStyle">
+					<select class="form-control width-100 bfh-selectbox fontStyle space" id="fontStyle">
 		 				<option value="normal">Normal</option>
 		 				<option value="italic">Italic</option>
 		 				<option value="bold">Bold</option>
 					</select>
 					<label for="fontSize">Font Size</label>
-					<div class="bfh-selectbox bfh-fontsizes width-100" data-fontsize="12" id="fontSize"></div>
-	 			
+					<div class="bfh-selectbox bfh-fontsizes width-100 space" data-fontsize="12" id="fontSize"></div>
+
 					<label for="font">Font</label>
 					<div class="bfh-selectbox bfh-fonts width-100" data-font="Arial" id="font"></div>
 				</div>
@@ -80,13 +73,13 @@
 					<option value="8">8px</option>
 					<option value="10">10px</option>
 				</select>
-				<input data-intro='Click to undo' data-step='12'  type="image" src="img/icons/undo.gif" id="undobutton" value="undo" class="icon"></input>
-				<input data-intro='Click to redo' data-step='13' data-position="left" type="image" src="img/icons/redo.gif" id="redobutton" value="redo" class="icon"></input>
-				<input data-intro='Here you can delete the drawing' data-step='14' data-position="left" type="image" src="img/icons/clear.gif" id="clearbutton" value="clear" class="icon"></input>
+				<input data-intro='Click to undo' data-step='12'  type="image" src="img/icons/undo.gif" alt="undo" id="undobutton" class="icon">
+				<input data-intro='Click to redo' data-step='13' data-position="left" type="image" src="img/icons/redo.gif" alt="redo" id="redobutton" class="icon">
+				<input data-intro='Here you can delete the drawing' data-step='14' data-position="left" type="image" src="img/icons/clear.gif" alt="clear" id="clearbutton" class="icon">
 				<br/>
 				<div data-intro='Name your drawing and click to Save your drawing' data-step='15' data-position="left" class="form-inline" >
 					<input class="form-control width-100" type="text" id="SaveDrawingTitle" placeholder="My drawing"/>
-					<input type="image" src="img/icons/save.gif"  type="button" name="tool" id="savebutton" value="Save Drawing" class="icon"></input>
+					<input type="image" src="img/icons/save.gif" alt="save" name="tool" id="savebutton" class="icon">
 				</div>
 				<div data-intro='Click on the drawing you want to open' data-step='16' data-position="left">
 					<div class="drawingListTitle">Drawing list</div>

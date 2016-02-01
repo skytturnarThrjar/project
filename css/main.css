@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Avenir";
+  src: url(AvenirLTStd-Book.otf) format("truetype");
+}
+
 body {
 	color:#4a4c49;
 	font-family: 'Avenir';
@@ -7,47 +12,6 @@ label {
 	position: absolute;
 	padding-left: 110px;
 	padding-top: 10px;
-}
-
-@font-face {
-    font-family: "Avenir";
-    src: url(AvenirLTStd-Book.otf) format("truetype");
-}
-
-.width-100 {
-    width: 100px;
-}
-
-#canvas {
-	display:block;
-}
-
-#toolbar {
-	background-color:#dedede;
-	margin: 0;
-	padding: 20px;
-	height : 110%;
-	margin-right: -25px;
-	/*z-index: -1;
-    position: relative;*/
-}
-
-#drawingList {
-	background-color: white;
-	opacity: 0.8;
-    height:90px;
-    overflow-x:scroll;
-}
-
-.drawingListTitle {
-	background-color: white;
-	opacity: 0.8;
-    height:30px;
-    font-size: 20px;
-    font-family: 'Avenir';
-    padding-left: 20px;
-    border-bottom: solid;
-    border-bottom-width: 1px;
 }
 
 li {
@@ -61,23 +25,82 @@ li:hover {
 	text-decoration: none;
 }
 
+.width-100 {
+  width: 100px;
+}
+
+.drawingListTitle {
+	background-color: white;
+	opacity: 0.8;
+  height:30px;
+  font-size: 20px;
+  font-family: 'Avenir';
+  padding-left: 20px;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+}
+
 .shapes {
 	justify-content: center;
 }
 
 .textfield {
-    position: absolute;
-    height: 50px;
-    width: 400px;
-    display: none;
-    z-index: 99;
+  position: absolute;
+  height: 50px;
+  width: 400px;
+  display: none;
+  z-index: 99;
+}
 
+.icon {
+ 	width: 40px;
+  height: 40px;
+  background-color: #494d4a;
+}
+
+.icon:hover {
+	width: 40px;
+  height: 40px;
+  background-color: #1dafd8;
+}
+
+.iconActive {
+	width: 40px;
+  height: 40px;
+  background-color: #1dafd8;
+}
+
+.introjs-helperNumberLayer {
+  visibility: hidden !important;
+}
+
+.space {
+	margin-top: 5px;
+}
+
+#canvas {
+	display:block;
+}
+
+#toolbar {
+	background-color:#dedede;
+	margin: 0;
+	padding: 20px;
+	height : 110%;
+	margin-right: -25px;
+}
+
+#drawingList {
+	background-color: white;
+	opacity: 0.8;
+  height:90px;
+  overflow-x:scroll;
 }
 
 #textbox {
 	font-size: 20pt;
 	height: 50px;
-    width: 300px;
+  width: 300px;
 }
 
 #SaveDrawingTitle {
@@ -88,39 +111,13 @@ li:hover {
 	margin-bottom: -12px;
 }
 
-.icon {  
- 	width: 40px;
-    height: 40px;
-    background-color: #494d4a;
-}
-
-.icon:hover{ 
-	width: 40px;
-    height: 40px;
-    background-color: #1dafd8;
-}
-
-.iconActive {
-	width: 40px;
-    height: 40px;
-    background-color: #1dafd8;
-}
-
-.introjs-helperNumberLayer
-{
-    visibility: hidden !important;
-}
-
 #logo {
 	width:90%;
 	margin-top: -15%;
 }
 
-#info-icon
-{
+#info-icon {
 	width: 40px;
-    height: 40px;
-   
-    margin-left: 83%;
-/*    position:absolute;
-*/}
+  height: 40px;
+  margin-left: 83%;
+}
